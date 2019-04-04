@@ -1,38 +1,35 @@
-from flask import Flask
+from flask import Flask, send_from_directory, request, jsonify
+from recipesDriver import search_by_ingredients
+import os, sqlite3
 
 app = Flask(__name__, static_url_path='/Users/hoeunsim2/Dropbox/dev/recipe-recommender')
 
 
 @app.route("/")
 def index():
-    with open('index.html', 'r') as file:
+    print(os.path.dirname(os.path.realpath(__file__)))
+    with open('../static/index.html', 'r') as file:
         return file.read()
-    #return app.send_static_file("index.html")
+
 
 @app.route('/js/<path:path>')
 def send_js(path):
-    return send_from_directory('js', path)
+    return send_from_directory('../static/js', path)
 
-@app.route('/css/<path:path>')
-def send_css(path):
-    return send_from_directory('css', path)
 
 @app.route('/images/<path:path>')
 def send_images(path):
-    return send_from_directory('images', path)
+    return send_from_directory('../images', path)
+
 
 @app.route('/fonts/<path:path>')
 def send_fonts(path):
-    return send_from_directory('fonts', path)
+    return send_from_directory('../fonts', path)
+
 
 @app.route('/data/allrecipes/images/userphotos/<path:path>')
 def send_photos(path):
-    return send_from_directory('data/allrecipes/images/userphotos', path)
-
-
-@app.route("/hello")
-def hello():
-    return "Hello World!"
+    return send_from_directory('../data/allrecipes/images/userphotos', path)
 
 
 @app.route("/search")
@@ -42,7 +39,7 @@ def search():
 
     :return: the user's query (i.e., ingredients)
     """
-    connection = sqlite3.connect('data.db')
+    connection = sqlite3.connect('../data.db')
 
     q = request.args.get('q', default=None, type=str)
     if not q:
@@ -52,8 +49,6 @@ def search():
     print(recipes)
 
     return jsonify(recipes[0:9])
-
-    #   return f"<h1>{q}</h1>"
 
 
 if __name__ == "__main__":
