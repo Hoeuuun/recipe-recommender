@@ -8,7 +8,7 @@ def main():
 
     user_ingredients = get_ingredients()
 
-    conn = sqlite3.connect('schema.db')
+    conn = sqlite3.connect('data.db')
 
     recipe_ids = find_recipes_by_ingredients(conn, user_ingredients)
 
