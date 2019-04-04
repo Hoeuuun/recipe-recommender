@@ -42,7 +42,7 @@ def search():
 
     :return: the user's query (i.e., ingredients)
     """
-    connection = sqlite3.connect('schema.db')
+    connection = sqlite3.connect('data.db')
 
     q = request.args.get('q', default=None, type=str)
     if not q:
