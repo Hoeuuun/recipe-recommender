@@ -72,13 +72,13 @@ def insert_new_recipe(connection, data):
 
 
 # Create a connection object that represents the database
-conn = sqlite3.connect('schema.db')
+conn = sqlite3.connect('data.db')
 
 # Create a cursor object
 c = conn.cursor()
 
-# Get the commands from schema.sql file
-with open('schema.sql', 'r') as in_file:  # open and read the file
+# Get the commands from data.sql file
+with open('data.sql', 'r') as in_file:  # open and read the file
     sql_file = in_file.read()
 sql_commands = sql_file.split(';')  # get all the commands, separated by ';'
 
