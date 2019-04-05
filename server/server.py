@@ -4,28 +4,16 @@ import os, sqlite3
 
 app = Flask(__name__, static_url_path='/Users/hoeunsim2/Dropbox/dev/recipe-recommender')
 
-
 @app.route("/")
 def index():
     print(os.path.dirname(os.path.realpath(__file__)))
     with open('../static/index.html', 'r') as file:
         return file.read()
 
-
-@app.route('/js/<path:path>')
-def send_js(path):
-    return send_from_directory('../static/js', path)
-
-
-@app.route('/images/<path:path>')
-def send_images(path):
-    return send_from_directory('../images', path)
-
-
-@app.route('/fonts/<path:path>')
-def send_fonts(path):
-    return send_from_directory('../fonts', path)
-
+@app.route("/<path:path>")
+def send_static(path):
+    print(os.path.dirname(os.path.realpath(__file__)))
+    return send_from_directory('../static', path)
 
 @app.route('/data/allrecipes/images/userphotos/<path:path>')
 def send_photos(path):
@@ -52,4 +40,4 @@ def search():
 
 
 if __name__ == "__main__":
-    app.run(port=11337)
+    app.run()
