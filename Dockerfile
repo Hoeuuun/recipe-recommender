@@ -11,5 +11,7 @@ ADD entry.sh /recommender/entry.sh
 
 RUN chmod +x /recommender/entry.sh
 
+EXPOSE 5000
+
 ENTRYPOINT exec /recommender/entry.sh
 

@@ -7,7 +7,7 @@ app = Flask(__name__, static_url_path='/Users/hoeunsim2/Dropbox/dev/recipe-recom
 @app.route("/")
 def index():
     print(os.path.dirname(os.path.realpath(__file__)))
-    with open('../static/index.html', 'r') as file:
+    with open('../static/index.html', 'r', encoding='utf-8') as file:
         return file.read()
 
 @app.route("/<path:path>")
@@ -40,4 +40,4 @@ def search():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host= '0.0.0.0', port=5000)
