@@ -12,13 +12,15 @@ def index():
 
 @app.route("/<path:path>")
 def send_static(path):
+    """
+    Serve static content by default.
+    """
     print(os.path.dirname(os.path.realpath(__file__)))
     return send_from_directory('../static', path)
 
 @app.route('/data/allrecipes/images/userphotos/<path:path>')
 def send_photos(path):
     return send_from_directory('../data/allrecipes/images/userphotos', path)
-
 
 @app.route("/search")
 def search():
@@ -40,4 +42,5 @@ def search():
 
 
 if __name__ == "__main__":
+    # Setting host to 0.0.0.0 exposes server to outside network.
     app.run(host= '0.0.0.0', port=5000)
