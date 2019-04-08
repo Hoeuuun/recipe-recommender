@@ -114,7 +114,7 @@ hr {
 
 /* home section */
 #home {
-  background: url('../..images/img/olive_oil.jpg') 100% 0 repeat-y fixed;
+  background: url('../../images/olive_oil.jpg') 100% 0 repeat-y fixed;
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
