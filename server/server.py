@@ -22,6 +22,10 @@ def send_static(path):
 def send_photos(path):
     return send_from_directory('../data/allrecipes/images/userphotos', path)
 
+@app.route('/images/<path:path>')
+def send_images(path):
+    return send_from_directory('../images', path)
+
 @app.route("/search")
 def search():
     """
