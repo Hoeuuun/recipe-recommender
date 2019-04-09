@@ -1,8 +1,10 @@
+import pickle
 import sqlite3
 from sqlite3 import OperationalError
 
-from parseJSON import get_data, remove_duplicates
+from parse_json import get_data, remove_duplicates
 
+from ingredients_index import update_index
 
 # def find_recipes_by_ingredients(connection, ingredient_needles):
 #     cursor = connection.cursor()
@@ -21,7 +23,7 @@ from parseJSON import get_data, remove_duplicates
 #     print(recipe_ids)
 
 
-def insert_new_recipe(connection, data):
+def insert_new_recipe(connection, data, ingredients_index=None):
     cursor = connection.cursor()
     title = data['title']
     rating = int((data['rating_stars'] / 5) * 100)
@@ -37,10 +39,14 @@ def insert_new_recipe(connection, data):
     cursor.execute("SELECT id FROM Recipe WHERE title=?", [title])
 
     recipe_id = cursor.fetchone()[0]
+    data['id'] = recipe_id
 
     # print("new recipe ", recipe_id)
 
     seen_ingredients = set()
+
+    if ingredients_index is not None:
+        update_index(ingredients_index, data)
 
     for ingredient in data['ingredients']:
         ingredient_name = ingredient
@@ -91,11 +97,13 @@ for command in sql_commands:
 
 # Populate the database with data from JSON file
 
-recipes_original = get_data('data/allrecipes/data/recipes.json')  # get the data
+recipes_original = get_data('../data/allrecipes/data/recipes.json')  # get the data
 recipes = remove_duplicates(recipes_original)  # clean the data
 
+ingredient_word_index = {}
+
 for i, recipe in enumerate(recipes):
-    insert_new_recipe(conn, recipe)
+    insert_new_recipe(conn, recipe, ingredients_index=ingredient_word_index)
     if i % 10000 == 0:
         conn.commit()
 
@@ -109,3 +117,6 @@ conn.commit()
 conn.close()
 
 print('all good')
+
+print('dumping index to ingredient_index.pickle')
+pickle.dump(ingredient_word_index, open('ingredient_index.pickle', 'wb'))

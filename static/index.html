@@ -18,7 +18,6 @@
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
 <!-- preloader section -->
 <section class="preloader">
 	<div class="sk-spinner sk-spinner-pulse"></div>
@@ -68,8 +67,11 @@
 				<h1 class="heading">Search for Recipes by Entering Ingredients you already have</h1>
                 <div class="col-md-12 col-sm-12">
                     <div class="search-container">
-                        <input name="search" type="text" class="form-control" id="search" placeholder="Find a Recipe">
-                        <button type="submit" onclick="onSearch()"><i class="fa fa-search"></i></button>
+						<form action="#" onsubmit="onSearch(); return false">
+                        	<input name="search" type="text" class="form-control" id="search" placeholder="Find a Recipe">
+							<button type="submit"><i class="fa fa-search"></i></button>
+                        	<input style="display: none" type="submit" />
+						</form>
                     </div>
                 </div>
 				<hr>

@@ -2,6 +2,8 @@ import sqlite3
 import re
 import json
 
+from ingredients_index import search_recipes_by_ingredient_words
+
 
 def main():
     print("\n*** Recipe Generator ***\n")
@@ -31,8 +33,12 @@ def main():
     # '''
 
 
-def search_by_ingredients(connection, ingredient_names):
-    recipe_ids = find_recipes_by_ingredients(connection, ingredient_names)
+def search_by_ingredients(connection, ingredient_names, ingredient_index=None):
+    if ingredient_index is None:
+        recipe_ids = find_recipes_by_ingredients(connection, ingredient_names)
+    else:
+        print("USING INDEX")
+        recipe_ids = search_recipes_by_ingredient_words(ingredient_index, ingredient_names)
 
     recipe_list = get_recipe_list(connection, recipe_ids)
 
@@ -70,10 +76,11 @@ def get_recipe_by_id(conn, id):
     for recipe in recipes:
         # print(recipe)
 
-    # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	113	0	113	3 tablespoons white sugar
-    # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	314	0	314	1 (12 fluid ounce) can or bottle beer
-    # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	315	0	315	3 cups self-rising flour
+        # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	113	0	113	3 tablespoons white sugar
+        # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	314	0	314	1 (12 fluid ounce) can or bottle beer
+        # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	315	0	315	3 cups self-rising flour
 
+        id = recipe[0]
         title = recipe[1]
         rating = recipe[2]
         time = recipe[3]
@@ -87,7 +94,8 @@ def get_recipe_by_id(conn, id):
         for ing in recipes:
             ingredients.append(ing[10])
 
-    recipe_object = {'title': title, 'rating': rating, 'time': time, 'image': image, 'url': url, 'quantity': quantity, 'ingredients': ingredients}
+    recipe_object = {'id': id, 'title': title, 'rating': rating, 'time': time, 'image': image, 'url': url,
+                     'quantity': quantity, 'ingredients': ingredients}
 
     return recipe_object
 
