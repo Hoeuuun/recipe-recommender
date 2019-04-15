@@ -4,7 +4,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 Ingredients word index links a word occuring in ingredients to recipe 
 ids where these ingredients may be found.
 
-Its a dictionary of word -> set of recipe ids.
+It's a dictionary of word -> set of recipe ids.
 """
 
 def update_index(index, recipe):
