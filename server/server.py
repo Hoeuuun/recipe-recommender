@@ -44,14 +44,32 @@ def search():
     connection = sqlite3.connect('../data.db')
 
     q = request.args.get('q', default=None, type=str)
+
+    minTime = request.args.get('minTime', default=None, type=int)
+    maxTime = request.args.get('maxTime', default=None, type=int)
+
+    rating = request.args.get('rating', default=None, type=int)
+
     if not q:
         abort(422, "Missing query")
 
     recipes = search_by_ingredients(connection, q.split(","),
                                     ingredient_index=INGREDIENT_INDEX)
+
+    if minTime is not None and maxTime is not None:
+        print(f"Using {minTime} - {maxTime} minute range.")
+        recipes = list(filter(lambda recipe: recipe['time'] >= minTime and recipe['time'] <= maxTime, recipes))
+
+    if rating is not None:
+        print(f"Sorting by {rating}")
+        recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=True)
     #print(recipes)
 
-    return jsonify(recipes[0:9])
+    # diet, rating, reviews, time
+    # diet, rating, reviews, time
+
+
+    return jsonify({'total': len(recipes),'data': recipes[0:100]})
 
 
 if __name__ == "__main__":
