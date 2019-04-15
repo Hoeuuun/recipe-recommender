@@ -32,6 +32,7 @@ function onSearch() {
     var maxTime = time_filter[1];
 
     var rating = 1;
+    var review;
 
     $.ajax(
         {

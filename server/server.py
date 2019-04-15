@@ -68,8 +68,7 @@ def search():
     # diet, rating, reviews, time
     # diet, rating, reviews, time
 
-
-    return jsonify({'total': len(recipes),'data': recipes[0:100]})
+    return jsonify({'total': len(recipes),'data': recipes[0:50]})
 
 
 if __name__ == "__main__":
