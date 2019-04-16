@@ -197,30 +197,81 @@ button {
 #recipes .form-control {
 /* background: #ffffff; */
 border-color: #999;
-border-radius: 3px;
+border-radius: 5px;
 box-shadow: none;
 margin-top: 30px;
 margin-bottom: 10px;
 transition: all 0.1s ease-in-out;
 display:inline-block;
 position: relative;
-
 }
 
-#recipes .form-control:focus {
-  border-color: black;
+search-container .form-control {
+    border-style: solid;
+    border-width: thick;
 }
 
 #recipes input {
   height: 48px;
   padding-left: 50px;
+  border: 3px solid #999;
+  border-radius: 10px;
+  color: black;
 }
 
 #recipes input[type="text"]:hover {
 	border: 2px solid #999;
-	border-radius:5px;
+	border-radius: 8px;
   	color: black;
 }
+
+
+.filters select {
+    padding: 10px;
+}
+
+
+select {
+    background: darkgrey;
+    /*border: 1px solid #F0F3FB;*/
+    /*border-radius: 4px;*/
+    /*width: 100%;*/
+    padding: 10px;
+    font-size: 1em;
+    color: white;
+    width: 7em;
+
+    /* Here's the code we need */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    /*padding: 20px;*/
+    /*display: inline-block;*/
+}
+
+.filters {
+    position: relative;
+    display: inline-flex;
+}
+
+.filter:after {
+    font-family: FontAwesome;
+    content: '\f107';
+    font-size: 20px;
+    position: relative;
+    top: 3px;
+    right: 25px;
+    color: white;
+    pointer-events: none;
+    /*display: inline-block;*/
+}
+
+select::-ms-expand {
+    display: none;
+}
+
 
 /* contact section */
 #contact {

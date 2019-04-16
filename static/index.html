@@ -67,41 +67,48 @@
 				<h1 class="heading">Search for Recipes by Entering Ingredients you already have</h1>
                 <div class="col-md-12 col-sm-12">
                     <div class="search-container">
-                        	<input name="search" type="text" class="form-control" id="search" placeholder="Find a Recipe">
-							<button onclick="onSearch()"><i class="fa fa-search"></i></button>
-							<input style="display: none" type="submit" />
-						<!-- filter  -->
-						<div>
-							<select id="diet_drop_down" onchange="onSearch();">
-								<option value="1">Diet</option>
-								<option value="2">Gluten free</option>
-								<option value="3">Lactose free</option>
-								<option value="4">Paleo</option>
-								<option value="4">Pescatarian</option>
-								<option value="5">Vegan</option>
-								<option value="6">Vegetarian</option>
-							</select>
-							<select id="rating_drop_down" onchange="onSearch();">
-								<option value="1">Rating</option>
-								<option value="2">Highest</option>
-								<option value="3">Lowest</option>
-							</select>
-							<select id="review_drop_down" onchange="onSearch();">
-								<option value="1">Reviews</option>
-								<option value="2">Highest</option>
-								<option value="3">Lowest</option>
-							</select>
-							<select id="time_drop_down" onchange="onSearch();">
-								<option value="1">Time</option>
-								<option value="2">< 30 mins</option>
-								<option value="3">< 60 mins</option>
-								<option value="4">60+ mins</option>
-							</select>
-
+						<!-- search box -->
+						<input name="search" type="text" class="form-control" id="search" placeholder="Find a Recipe">
+						<button onclick="onSearch()"><i class="fa fa-search"></i></button>
+						<input style="display: none" type="submit" />
+						<!-- filters -->
+						<div class="filters">
+							<div class="filter">
+								<select id="diet_drop_down" onchange="onSearch();">
+									<option selected>Diet</option>
+									<option value="1">Gluten free</option>
+									<option value="2">Lactose free</option>
+									<option value="3">Paleo</option>
+									<option value="4">Pescatarian</option>
+									<option value="5">Vegan</option>
+									<option value="6">Vegetarian</option>
+								</select>
+							</div>
+							<div class="filter">
+								<select id="rating_drop_down" onchange="onSearch();">
+									<option selected>Rating</option>
+									<option value="1">Highest</option>
+									<option value="2">Lowest</option>
+								</select>
+							</div>
+							<div class="filter">
+								<select id="review_drop_down" onchange="onSearch();">
+									<option selected>Reviews</option>
+									<option value="1">Highest</option>
+									<option value="2">Lowest</option>
+								</select>
+							</div>
+							<div class="filter">
+								<select id="time_drop_down" onchange="onSearch();">
+									<option selected>Time</option>
+									<option value="1">< 30 mins</option>
+									<option value="2">< 60 mins</option>
+									<option value="3">60+ mins</option>
+								</select>
+							</div>
 						</div>
                     </div>
                 </div>
-				<hr>
 			</div>
 			<div id="search_results">
 			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -139,18 +146,6 @@
 		</div>
 	</div>
 </section>
-
-<!-- filter buttons -->
-
-<div>
-	<select ID="Time">
-			<option Value="1">Under 30 minutes</option>
-			<option Value="2">30 - 60 minutes</option>
-			<option Value = "3">60+ minutes</option>
-			<option Value= "4">Slow cook</option>
-	</select>
-<br />
-</div>
 
 <!-- contact section -->
 <section id="contact" class="parallax-section">

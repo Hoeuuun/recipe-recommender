@@ -41,7 +41,7 @@ def search():
 
     :return: the user's query (i.e., ingredients)
     """
-    connection = sqlite3.connect('../data.db')
+    connection = sqlite3.connect('data.db')
 
     q = request.args.get('q', default=None, type=str)
 
@@ -49,6 +49,8 @@ def search():
     maxTime = request.args.get('maxTime', default=None, type=int)
 
     rating = request.args.get('rating', default=None, type=int)
+
+    review_count = request.args.get('review_count', default=None, type=int)
 
     if not q:
         abort(422, "Missing query")
@@ -63,6 +65,11 @@ def search():
     if rating is not None:
         print(f"Sorting by {rating}")
         recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=True)
+
+    if review_count is not None:
+        print(f"Sorting by {review_count}")
+    recipes = sorted(recipes, key=lambda recipe: recipe['review_count'], reverse=True)
+
     #print(recipes)
 
     # diet, rating, reviews, time

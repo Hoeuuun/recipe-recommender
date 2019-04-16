@@ -74,7 +74,7 @@ def get_recipe_by_id(conn, id):
     recipes = cursor.fetchall()
 
     for recipe in recipes:
-        # print(recipe)
+        #print(recipe)
 
         # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	113	0	113	3 tablespoons white sugar
         # 54	Beer Bread I	90	0	250x250/114163.jpg	http://allrecipes.com/Recipe/6717/	54	314	0	314	1 (12 fluid ounce) can or bottle beer
@@ -83,18 +83,19 @@ def get_recipe_by_id(conn, id):
         id = recipe[0]
         title = recipe[1]
         rating = recipe[2]
-        time = recipe[3]
-        image = recipe[4]
-        url = recipe[5]
+        review_count = recipe[3]
+        time = recipe[4]
+        image = recipe[5]
+        url = recipe[6]
 
-        quantity = recipe[8]
+        quantity = recipe[9]
 
         ingredients = []
 
         for ing in recipes:
-            ingredients.append(ing[10])
+            ingredients.append(ing[11])
 
-    recipe_object = {'id': id, 'title': title, 'rating': rating, 'time': time, 'image': image, 'url': url,
+    recipe_object = {'id': id, 'title': title, 'rating': rating, 'review_count': review_count, 'time': time, 'image': image, 'url': url,
                      'quantity': quantity, 'ingredients': ingredients}
 
     return recipe_object
