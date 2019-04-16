@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS "Recipe" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	"title"	TEXT NOT NULL UNIQUE,
 	"rating"	INTEGER,
+	"review_count" INTEGER,
 	"time"	INTEGER,
 	"image" TEXT,
 	"url" TEXT
@@ -37,7 +38,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS "recipe_ingrdients_index" ON "RecipeIngredient
 CREATE INDEX IF NOT EXISTS "recipe_index" ON "Recipe" (
 	"rating"	ASC,
 	"time"	ASC,
-	"title"	ASC
+	"review_count" ASC,
+  "title"	ASC
 );
 
 CREATE INDEX IF NOT EXISTS "ingredient_name" ON "Ingredient" (

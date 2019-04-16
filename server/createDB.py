@@ -27,14 +27,15 @@ def insert_new_recipe(connection, data, ingredients_index=None):
     cursor = connection.cursor()
     title = data['title']
     rating = int((data['rating_stars'] / 5) * 100)
+    review_count = int(data['review_count'])
     time = data['total_time_minutes']
     url = data['url']
     image = data['photo_url']
     if image:
         image = "/".join(image.split("/")[-2:])
 
-    cursor.execute("INSERT INTO Recipe (title, rating, time, image, url) VALUES(?, ?, ?, ?, ?)",
-                   (title, rating, time, image, url))
+    cursor.execute("INSERT INTO Recipe (title, rating, review_count, time, image, url) VALUES(?, ?, ?, ?, ?, ?)",
+                   (title, rating, review_count, time, image, url))
 
     cursor.execute("SELECT id FROM Recipe WHERE title=?", [title])
 

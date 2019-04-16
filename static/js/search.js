@@ -19,9 +19,9 @@ function onSearch() {
     var INF = 9999;
 
     var time_option = {
-        "2" : [0, 29],
-        "3": [0, 59],
-        "4": [0, INF]
+        "1" : [0, 29],
+        "2": [0, 59],
+        "3": [0, INF]
     };
 
     var time_filter = [0, INF];
@@ -32,11 +32,11 @@ function onSearch() {
     var maxTime = time_filter[1];
 
     var rating = 1;
-    var review;
+    var review_count = 1;
 
     $.ajax(
         {
-            url: API_URL + "search?q=" + userQuery + "&minTime=" + minTime + "&maxTime="+ maxTime + "&rating=" + rating,
+            url: API_URL + "search?q=" + userQuery + "&minTime=" + minTime + "&maxTime="+ maxTime + "&rating=" + rating + "&review_count=" + review_count,
             crossDomain: true,
             beforeSend: function(xhr){
                 xhr.withCredentials = true;
@@ -72,7 +72,7 @@ function onSearch() {
                     "../data/allrecipes/images/userphotos/" + recipe.image + "\" alt=\"" + recipe.title + "\" height=\"250\" width=\"250\">" +
                     "<div><h2><a href=" + recipe.url + " target=\"_blank\"> " + recipe.title + "</a>" +
                     "</h2>" +
-                    "<h3> Rating: " + recipe.rating + "/100  " + "   Time: " + recipe.time + " M</h3>" +
+                    "<h4> Rating: " + recipe.rating + "/100  " + "<br>" + "Time: " + recipe.time + " M " + "<br>" + "Reviews: " + recipe.review_count + "</h4>" +
                     "<span>" + recipe.ingredients.join("<br>") + "</span>" +
                     "</div></div>";
 
