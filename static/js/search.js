@@ -62,7 +62,7 @@ function onSearch() {
 
         var html = "";
 
-        html += "<h2>Found " + results['total'] + " recipes</h2>"
+        html += "<br><h2>Found " + results['total'] + " recipes</h2>"
 
 
         if (results['data']) {
@@ -84,7 +84,7 @@ function onSearch() {
 
                 html += "\">" +
                     "</a><img src=\"" +
-                    "../data/allrecipes/images/userphotos/" + recipe.image + "\" alt=\"" + recipe.title + "\" height=\"250\" width=\"250\">" +
+                    "./data/allrecipes/images/userphotos/" + recipe.image + "\" alt=\"" + recipe.title + "\" height=\"250\" width=\"250\">" +
                     "<div><h2><a href=" + recipe.url + " target=\"_blank\"> " + recipe.title + "</a>" +
                     "</h2>" +
                     "<h4> Rating: " + recipe.rating + "/100  " + "<br>" + "Time: " + recipe.time + " M " + "<br>" + "Reviews: " + recipe.review_count + "</h4>" +
