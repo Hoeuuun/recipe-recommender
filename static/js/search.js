@@ -62,7 +62,7 @@ function onSearch() {
 
         var html = "";
 
-        html += "<br><br><div><h2>Found " + results['total'] + " recipes</h2></div><br>"
+        $("#result_count").text("Found " + results['total'] + " recipes");
 
 
         if (results['data']) {
