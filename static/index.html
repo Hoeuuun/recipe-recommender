@@ -64,11 +64,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-offset-1 col-md-10 col-sm-12 text-center">
-				<h1 class="heading">Search for Recipes by Entering Ingredients you already have</h1>
+				<h1 class="heading">Search for Recipes by Entering Ingredients you have</h1>
                 <div class="col-md-12 col-sm-12">
                     <div class="search-container">
 						<!-- search box -->
-						<input name="search" type="text" class="form-control" id="search" placeholder="Find a Recipe">
+						<input name="search" type="text" class="form-control" id="search" placeholder="Find a Recipe" onkeypress="onSearchTyped()">
 						<button onclick="onSearch()"><i class="fa fa-search"></i></button>
 						<input style="display: none" type="submit" />
 						<!-- filters -->
@@ -112,36 +112,54 @@
 			</div>
 			<div id="search_results">
 			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.3s">
-				<a href="../images/gallery-img1.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/gallery-img1.jpg" alt="gallery img"></a>
+				<a href="../images/10_berries.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/10_berries.jpg" alt="gallery img"></a>
 				<div>
-					<h3>Lemon-Rosemary Prawn</h3>
-					<span>Seafood / Shrimp / Lemon</span>
+					<h3>Mixed Berry French Toast</h3>
+					<span>Bread / Berries / Syrup</span>
 				</div>
-				<a href="../images/gallery-img2.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/gallery-img2.jpg" alt="gallery img"></a>
+				<a href="../images/12_rice.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/12_rice.jpg" alt="gallery img"></a>
 				<div>
-					<h3>Lemon-Rosemary Vegetables</h3>
-					<span>Tomato / Rosemary / Lemon</span>
+					<h3>Seafood Paella</h3>
+					<span>Rice / Seafood / Saffron</span>
+				</div>
+				<a href="../images/33_spaghetti.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/33_spaghetti.jpg" alt="gallery img"></a>
+				<div>
+					<h3>Spaghetti</h3>
+					<span>Tomatoes / Spaghetti / Basil</span>
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
-				<a href="../images/gallery-img3.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/gallery-img3.jpg" alt="gallery img"></a>
+				<a href="../images/34_salad.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/34_salad.jpg" alt="gallery img"></a>
 				<div>
-					<h3>Lemon-Rosemary Bakery</h3>
-					<span>Bread / Rosemary / Orange</span>
+					<h3>Watermelon Salad</h3>
+					<span>Arugula / Watermelon / Feta</span>
+				</div>
+				<a href="../images/19_ramen.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/19_ramen.jpg" alt="gallery img"></a>
+				<div>
+					<h3>Ramen</h3>
+					<span>Ginger/ Ramen Noodles / Carrots</span>
+
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
+				<a href="../images/03_mussels.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/03_mussels.jpg" alt="gallery img"></a>
+				<div>
+					<h3>Steamed Mussels</h3>
+					<span>White Wine / Mussels / Garlic</span>
 				</div>
 			</div>
 			<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.9s">
-				<a href="../images/gallery-img4.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/gallery-img4.jpg" alt="gallery img"></a>
+				<a href="../images/21_fish.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/21_fish.jpg" alt="gallery img"></a>
 				<div>
-					<h3>Lemon-Rosemary Salad</h3>
-					<span>Chicken / Rosemary / Green</span>
+					<h3>Fish Florentine</h3>
+					<span>Codfish / Spinach / Parmesan</span>
 				</div>
-				<a href="../images/gallery-img5.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/gallery-img5.jpg" alt="gallery img"></a>
+				<a href="../images/24_poke.jpg" data-lightbox-gallery="zenda-gallery"><img src="../images/24_poke.jpg" alt="gallery img"></a>
 				<div>
 					<h3>Lemon-Rosemary Pizza</h3>
 					<span>Pasta / Rosemary / Green</span>
 				</div>
-			</div>
+
 			</div>
 		</div>
 	</div>

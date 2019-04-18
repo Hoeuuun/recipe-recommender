@@ -24,19 +24,34 @@ function onSearch() {
         "3": [0, INF]
     };
 
-    var time_filter = [0, INF];
+    var time_filter = $("#time_drop_down").prop('selectedIndex');
+    if (time_filter == 0) {
+       // default time filter
+       time_filter = [0, INF];
+    }
+    else {
+        time_filter = time_option[time_filter];
+    }
 
     console.log(time_filter);
 
     var minTime = time_filter[0];
     var maxTime = time_filter[1];
 
-    var rating = 1;
-    var review_count = 1;
+    var rating = $("#rating_drop_down").prop('selectedIndex');
+    var review_count = $("#review_drop_down").prop('selectedIndex');
+
+    var URL = API_URL + "search?q=" + userQuery + "&minTime=" + minTime + "&maxTime="+ maxTime
+    if (rating != 0) {
+        URL += "&rating=" + rating;
+    }
+    if (review_count != 0) {
+        URL += "&review_count=" + review_count;
+    }
 
     $.ajax(
         {
-            url: API_URL + "search?q=" + userQuery + "&minTime=" + minTime + "&maxTime="+ maxTime + "&rating=" + rating + "&review_count=" + review_count,
+            url: URL,
             crossDomain: true,
             beforeSend: function(xhr){
                 xhr.withCredentials = true;
@@ -81,4 +96,13 @@ function onSearch() {
 
         $("#search_results").html(html);
     });
+}
+
+function onSearchTyped(e) {
+    if (!e) e = window.event;
+    var keyCode = e.keyCode || e.which;
+    //alert(keyCode);
+    if (keyCode == '13'){
+        onSearch();
+    }
 }

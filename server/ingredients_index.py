@@ -15,7 +15,8 @@ def update_index(index, recipe):
         for word in word_tokenize(ingredient):
             # if word is not yet in index, put it into index and
             # map it to empty set
-            if not word in index:
+            word = word.lower()
+            if word not in index:
                 index[word] = set()
             index[word].add(recipe['id'])
 

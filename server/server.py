@@ -62,26 +62,22 @@ def search():
         print(f"Using {minTime} - {maxTime} minute range.")
         recipes = list(filter(lambda recipe: recipe['time'] >= minTime and recipe['time'] <= maxTime, recipes))
 
-    if rating is not None:
-        print(f"Sorting by {rating}")
-        recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=True)
 
     if review_count is not None:
         print(f"Sorting by {review_count}")
-    recipes = sorted(recipes, key=lambda recipe: recipe['review_count'], reverse=True)
+        recipes = sorted(recipes, key=lambda recipe: recipe['review_count'], reverse=review_count == 1)
 
-    #print(recipes)
+    if rating is not None:
+        print(f"Sorting by {rating}")
+        recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=rating == 1)
 
-    # diet, rating, reviews, time
-    # diet, rating, reviews, time
 
     return jsonify({'total': len(recipes),'data': recipes[0:50]})
 
 
 if __name__ == "__main__":
-    # Setting host to 0.0.0.0 exposes server to outside network.
-
     with open('ingredient_index.pickle', 'rb') as index_file:
         INGREDIENT_INDEX = pickle.load(index_file)
 
+        #print(INGREDIENT_INDEX)
     app.run(host='0.0.0.0', port=5000)
