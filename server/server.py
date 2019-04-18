@@ -80,4 +80,4 @@ if __name__ == "__main__":
         INGREDIENT_INDEX = pickle.load(index_file)
 
         #print(INGREDIENT_INDEX)
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, threaded=True)
