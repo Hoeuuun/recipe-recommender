@@ -1,4 +1,4 @@
-var API_URL = "http://localhost:5000/";
+var API_URL = "./";
 
 const delay1 = "0.3s";
 const delay2 = "0.6s";
