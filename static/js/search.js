@@ -62,7 +62,7 @@ function onSearch() {
 
         var html = "";
 
-        html += "<br><h2>Found " + results['total'] + " recipes</h2>"
+        html += "<br><br><div><h2>Found " + results['total'] + " recipes</h2></div><br>"
 
 
         if (results['data']) {
