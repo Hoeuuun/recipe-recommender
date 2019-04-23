@@ -43,7 +43,7 @@ def search():
     """
     connection = sqlite3.connect('data.db')
 
-    q = request.args.get('q', default=None, type=str)
+    q = request.args.get('q', default=None, type=str).lower()
 
     minTime = request.args.get('minTime', default=None, type=int)
     maxTime = request.args.get('maxTime', default=None, type=int)

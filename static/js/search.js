@@ -1,5 +1,6 @@
 var API_URL = "./";
 
+// different delays depending on image's column
 const delay1 = "0.3s";
 const delay2 = "0.6s";
 const delay3 = "0.9s";
@@ -7,21 +8,12 @@ const delay3 = "0.9s";
 function onSearch() {
     var userQuery = $("#search").val().split(" ").join(",");
 
-    // var timeFilter = $("#time").change(function(e) {
-    //     var text = $("#time :selected").text();
-    //     $("#DropDownList2").html(options);
-    //     if(text == "All") return;
-    //     $('#DropDownList2 :not([value^="' + text.substr(0, 3) + '"])').remove();
-    // });​
-
-    // search?q=foo&time=123
-
     var INF = 9999;
 
     var time_option = {
-        "1" : [0, 29],
-        "2": [0, 59],
-        "3": [0, INF]
+        "1" : [0, 29],  // < 30 mins
+        "2": [0, 59],   // < 60 mins
+        "3": [0, INF]   //   60+ mins
     };
 
     var time_filter = $("#time_drop_down").prop('selectedIndex');
@@ -98,6 +90,7 @@ function onSearch() {
     });
 }
 
+// triggers search on pressing enter key
 function onSearchTyped(e) {
     if (!e) e = window.event;
     var keyCode = e.keyCode || e.which;
