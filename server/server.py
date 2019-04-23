@@ -55,6 +55,9 @@ def search():
     if not q:
         abort(422, "Missing query")
 
+    if q is None:
+        print(f"Sorry, couldn't find any recipes matching \"{q}\"")
+
     recipes = search_by_ingredients(connection, q.split(","),
                                     ingredient_index=INGREDIENT_INDEX)
 
