@@ -80,4 +80,7 @@ if __name__ == "__main__":
         INGREDIENT_INDEX = pickle.load(index_file)
 
         #print(INGREDIENT_INDEX)
+    import logging
+    logging.basicConfig(filename='access.log',level=logging.DEBUG)
+
     app.run(host='0.0.0.0', port=5000, threaded=True)
