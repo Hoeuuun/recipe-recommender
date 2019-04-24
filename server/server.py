@@ -43,7 +43,12 @@ def search():
     """
     connection = sqlite3.connect('data.db')
 
-    q = request.args.get('q', default=None, type=str).lower()
+    q = request.args.get('q', default=None, type=str)
+
+    if not q:
+        abort(422, "Missing query")
+
+    q = q.lower()
 
     minTime = request.args.get('minTime', default=None, type=int)
     maxTime = request.args.get('maxTime', default=None, type=int)
@@ -51,12 +56,6 @@ def search():
     rating = request.args.get('rating', default=None, type=int)
 
     review_count = request.args.get('review_count', default=None, type=int)
-
-    if not q:
-        abort(422, "Missing query")
-
-    if q is None:
-        print(f"Sorry, couldn't find any recipes matching \"{q}\"")
 
     recipes = search_by_ingredients(connection, q.split(","),
                                     ingredient_index=INGREDIENT_INDEX)
