@@ -54,6 +54,9 @@ def sort_recipes_by_ingredient_count(recipe_list):
 def get_recipe_list(conn, recipe_ids):
     recipe_list = []
 
+    if recipe_ids is None:
+        return recipe_list
+
     for recipe_id in recipe_ids:
         recipe = get_recipe_by_id(conn, recipe_id)
         recipe_list.append(recipe)
