@@ -13,14 +13,14 @@ def get_data(json_file):
     parameters:
         - json_file (string): the path/location of the input data file
 
-    return value:
+    returns:
         - recipes (list): a list of recipes; each recipe is a dictionary
     """
     recipes = []
 
     with open(json_file, 'r') as data_file:
         for line in data_file:
-            recipe = json.loads(line)
+            recipe = json.load(line)
             recipes.append(recipe)
 
     return recipes
