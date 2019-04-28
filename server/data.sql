@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS "Recipe" (
 	"time"	INTEGER,
 	"image" TEXT,
 	"url" TEXT
-
 );
 
 CREATE TABLE IF NOT EXISTS "RecipeIngredients" (
@@ -30,7 +29,7 @@ CREATE TABLE IF NOT EXISTS "RecipeSteps" (
 	PRIMARY KEY("recipeId","stepNumber")
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS "recipe_ingrdients_index" ON "RecipeIngredients" (
+CREATE UNIQUE INDEX IF NOT EXISTS "recipe_ingredients_index" ON "RecipeIngredients" (
 	"recipeId"	ASC,
 	"ingredientId"	ASC
 );

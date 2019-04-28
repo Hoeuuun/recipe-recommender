@@ -16,21 +16,12 @@ def main():
 
     recipe_list = get_recipe_list(conn, recipe_ids)
 
-    # sorts the recipe list by least amount of ingredients needed
     recipes_sorted = sort_recipes_by_ingredient_count(recipe_list)
 
     for recipe in recipes_sorted:
         print(len(recipe['ingredients']), recipe)
 
     conn.close()
-
-    # # TODO: write to json file with json.dump()
-    # '''
-    # import json
-    # data = json.dumps(recipes_sorted)
-    # with open("recipes_out.json","w") as f:
-    #   f.write(data)
-    # '''
 
 
 def search_by_ingredients(connection, ingredient_names, ingredient_index=None):
