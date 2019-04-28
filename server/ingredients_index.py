@@ -1,21 +1,21 @@
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.tokenize import word_tokenize
 
 """
-Ingredients word index links a word occuring in ingredients to recipe 
+Links a word occurring in the list of ingredients to the recipe 
 ids where these ingredients may be found.
 
 It's a dictionary of word -> set of recipe ids.
 """
 
+
 def update_index(index, recipe):
     """
-    Update given index with a new recipe.
+    Updates a given index with a new recipe.
     """
     recipe_id = recipe['id']
     for ingredient in recipe['ingredients']:
         for word in word_tokenize(ingredient):
-            # if word is not yet in index, put it into index and
-            # map it to empty set
+            # if the word is not yet in the index, put it into index and map it to empty set
             __update_index(index, word, recipe_id)
 
     for word in word_tokenize(recipe['title']):
@@ -23,6 +23,9 @@ def update_index(index, recipe):
 
 
 def __update_index(index, word, recipe_id):
+    """
+    Internal helper function that updates the index for each word in ingredients and title.
+    """
     word = word.lower()
     if word not in index:
         index[word] = set()
@@ -34,8 +37,12 @@ def search_recipes_by_ingredient_words(index, ingredient_word_list):
     for word in ingredient_word_list:
         recipes = index.get(word)
         if recipes:
-            print("Got %d recipes for %s" % (len(recipes), word))
+            print(f'''Got {len(recipes)} recipes for {word}''')
             if result is None:
                 result = recipes.intersection()
             result = result.intersection(recipes)
+    if result:
+        print("Final search count: ",  len(result))
+    else:
+        print("Didn't find anything")
     return result

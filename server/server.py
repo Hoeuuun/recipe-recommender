@@ -14,7 +14,6 @@ def index():
     with open('../static/index.html', 'r', encoding='utf-8') as file:
         return file.read()
 
-
 @app.route("/<path:path>")
 def send_static(path):
     """
@@ -74,14 +73,13 @@ def search():
         recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=rating == 1)
 
 
-    return jsonify({'total': len(recipes),'data': recipes[0:50]})
+    return jsonify({'total': len(recipes),'data': recipes[0:25]})
 
 
 if __name__ == "__main__":
     with open('ingredient_index.pickle', 'rb') as index_file:
         INGREDIENT_INDEX = pickle.load(index_file)
 
-        #print(INGREDIENT_INDEX)
     import logging
     logging.basicConfig(filename='access.log',level=logging.DEBUG)
 
