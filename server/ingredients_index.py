@@ -8,7 +8,7 @@ It's a dictionary of word -> set of recipe ids.
 """
 
 
-def update_index(index, recipe):
+def     update_index(index, recipe):
     """
     Updates a given index with a new recipe.
     """

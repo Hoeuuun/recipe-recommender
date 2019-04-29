@@ -28,9 +28,7 @@ def search_by_ingredients(connection, ingredient_names, ingredient_index=None):
 
     recipe_list = get_recipe_list(connection, recipe_ids)
 
-    recipes_sorted = sort_recipes_by_ingredient_count(recipe_list)
-
-    return recipes_sorted
+    return recipe_list
 
 
 def sort_recipes_by_ingredient_count(recipe_list):

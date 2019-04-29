@@ -11,17 +11,15 @@ function onSearch() {
     var INF = 9999;
 
     var time_option = {
-        "1" : [0, 29],  // < 30 mins
+        "1": [0, 29],  // < 30 mins
         "2": [0, 59],   // < 60 mins
         "3": [0, INF]   //   60+ mins
     };
 
     var time_filter = $("#time_drop_down").prop('selectedIndex');
     if (time_filter == 0) {
-       // default time filter
-       time_filter = [0, INF];
-    }
-    else {
+        time_filter = [0, INF];  // default time filter
+    } else {
         time_filter = time_option[time_filter];
     }
 
@@ -33,7 +31,8 @@ function onSearch() {
     var rating = $("#rating_drop_down").prop('selectedIndex');
     var review_count = $("#review_drop_down").prop('selectedIndex');
 
-    var URL = API_URL + "search?q=" + userQuery + "&minTime=" + minTime + "&maxTime="+ maxTime
+    var URL = API_URL + "search?q=" + userQuery + "&minTime=" + minTime + "&maxTime=" + maxTime
+
     if (rating != 0) {
         URL += "&rating=" + rating;
     }
@@ -41,14 +40,11 @@ function onSearch() {
         URL += "&review_count=" + review_count;
     }
 
-    $.ajax(
-        {
-            url: URL,
-            crossDomain: true,
-            beforeSend: function(xhr){
-                xhr.withCredentials = true;
-            }
-        }).done(function(results) {
+    var ajaxCall = $.ajax({
+            url: URL
+        });
+
+    ajaxCall.done(function (results) {
         console.log(results);
         console.log(typeof results);
 
@@ -95,7 +91,7 @@ function onSearchTyped(e) {
     if (!e) e = window.event;
     var keyCode = e.keyCode || e.which;
     //alert(keyCode);
-    if (keyCode == '13'){
+    if (keyCode == '13') {
         onSearch();
     }
 }

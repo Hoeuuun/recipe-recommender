@@ -5,14 +5,17 @@ import pickle
 
 INGREDIENT_INDEX = None
 
+# Create an instance of Flask class and call it app
 app = Flask(__name__, static_url_path='/Users/hoeunsim2/Dropbox/dev/recipe-recommender')
 
 
+# The default page
 @app.route("/")
 def index():
     print(os.path.dirname(os.path.realpath(__file__)))
     with open('../static/index.html', 'r', encoding='utf-8') as file:
         return file.read()
+
 
 @app.route("/<path:path>")
 def send_static(path):
@@ -45,14 +48,14 @@ def search():
     q = request.args.get('q', default=None, type=str)
 
     if not q:
-        abort(422, "Missing query")
+        abort(422, "Missing query")     # 422 unprocessable entity
 
     q = q.lower()
 
     minTime = request.args.get('minTime', default=None, type=int)
     maxTime = request.args.get('maxTime', default=None, type=int)
 
-    rating = request.args.get('rating', default=None, type=int)
+    rating = request.args.get('rating', default=None, type=int)     #
 
     review_count = request.args.get('review_count', default=None, type=int)
 
@@ -63,7 +66,6 @@ def search():
         print(f"Using {minTime} - {maxTime} minute range.")
         recipes = list(filter(lambda recipe: recipe['time'] >= minTime and recipe['time'] <= maxTime, recipes))
 
-
     if review_count is not None:
         print(f"Sorting by {review_count}")
         recipes = sorted(recipes, key=lambda recipe: recipe['review_count'], reverse=review_count == 1)
@@ -72,8 +74,7 @@ def search():
         print(f"Sorting by {rating}")
         recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=rating == 1)
 
-
-    return jsonify({'total': len(recipes),'data': recipes[0:25]})
+    return jsonify({'total': len(recipes), 'data': recipes[0:25]})
 
 
 if __name__ == "__main__":
@@ -81,6 +82,6 @@ if __name__ == "__main__":
         INGREDIENT_INDEX = pickle.load(index_file)
 
     import logging
-    logging.basicConfig(filename='access.log',level=logging.DEBUG)
+    logging.basicConfig(filename='access.log', level=logging.DEBUG)
 
     app.run(host='0.0.0.0', port=5000, threaded=True)
