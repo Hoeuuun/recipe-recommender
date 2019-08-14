@@ -4,6 +4,7 @@ from sqlite3 import OperationalError
 from parse_json import get_data, remove_duplicates
 from ingredients_index import update_index
 from quantulum3 import parser
+from quantities import convert_to_mL
 
 
 def insert_new_recipe(connection, data, ingredients_index=None):
@@ -43,19 +44,28 @@ def insert_new_recipe(connection, data, ingredients_index=None):
     if ingredients_index is not None:
         update_index(ingredients_index, data)
 
-    # Loop through the ingredients
+    # Parse ingredients' quantity
+    ingredient_quantity = 'NA'
+    ingredient_value = 0.0
+    ingredient_unit = 'NA'
+    ingredient_entity = 'NA'
+    quant_mL = 0.0
+
     for ingredient in data['ingredients']:
         ingredient_name = ingredient
-        
         try:
             quant = parser.parse(ingredient_name)
             # make sure the quantity is not empty
             if (len(quant) > 0):
                 ingredient_quantity = quant[0].surface
-            else:
-                ingredient_quantity = 0
+                ingredient_value = quant[0].value
+                ingredient_unit = quant[0].unit.name
+                ingredient_entity = quant[0].unit.entity.name
+
+                quant_mL = convert_to_mL(ingredient_value, ingredient_unit)
+
         except:
-            pass    #TODO fix parser bug
+            pass    # TODO: optimize quantulum parser
 
         # For each ingredient, get the its id
         cursor.execute("SELECT id FROM Ingredient WHERE name=?", [ingredient_name])
@@ -68,19 +78,23 @@ def insert_new_recipe(connection, data, ingredients_index=None):
         else:
             ingredient_id = ingredient_id[0]
 
-        # If we've already have the ingredient_id, skip
+        # Skip if we've already have the ingredient_id
         if ingredient_id in seen_ingredients:
             continue
 
-        # Else add this id seen ingredients set
+        # Else add this id to seen ingredients set
         seen_ingredients.add(ingredient_id)
 
         # print("new ingredient", ingredient_id, ingredient_name)
 
         # Add the recipe and ingredient's ids to the RecipeIngredients table
-        cursor.execute("INSERT INTO RecipeIngredients (recipeId, ingredientId, quantity) VALUES (?, ?, ?)", [recipe_id,
+        cursor.execute("INSERT INTO RecipeIngredients (recipeId, ingredientId, quantity, value, unit, entity, quant_mL) VALUES (?, ?, ?, ?, ?, ?, ?)", [recipe_id,
                                                                                                              ingredient_id,
-                                                                                                             ingredient_quantity])
+                                                                                                             ingredient_quantity,
+                                                                                                             ingredient_value,
+                                                                                                             ingredient_unit,
+                                                                                                             ingredient_entity,
+                                                                                                             quant_mL])
     # Look through the steps for the recipe and add it each step to the RecipeSteps table
     for i, instruction in enumerate(data['instructions']):
         cursor.execute("INSERT INTO RecipeSteps (recipeId, stepNumber, description) VALUES (?, ?, ?)", [recipe_id, i,
@@ -124,7 +138,7 @@ conn.commit()
 # Close the connection
 conn.close()
 
-# By no, if no errors, success
+# By now, if no errors, success
 print('all good')
 
 # Finally, if success, write a pickled rep of the ingredients dictionary to file
