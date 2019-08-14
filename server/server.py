@@ -38,11 +38,6 @@ def send_images(path):
 
 @app.route("/search")
 def search():
-    """
-    Get parameters from the URL and display it.
-
-    :return: the user's query (i.e., ingredients)
-    """
     connection = sqlite3.connect('data.db')
 
     q = request.args.get('q', default=None, type=str)
@@ -55,7 +50,7 @@ def search():
     minTime = request.args.get('minTime', default=None, type=int)
     maxTime = request.args.get('maxTime', default=None, type=int)
 
-    rating = request.args.get('rating', default=None, type=int)     #
+    rating = request.args.get('rating', default=None, type=int)
 
     review_count = request.args.get('review_count', default=None, type=int)
 
