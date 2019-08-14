@@ -13,7 +13,11 @@ CREATE TABLE IF NOT EXISTS "Recipe" (
 CREATE TABLE IF NOT EXISTS "RecipeIngredients" (
 	"recipeId"	INTEGER NOT NULL,
 	"ingredientId"	INTEGER NOT NULL,
-	"quantity"	INTEGER NOT NULL,
+	"quantity"	TEXT NOT NULL,
+	"value"	REAL NOT NULL,
+	"unit" TEXT NOT NULL,
+	"entity"	 TEXT NOT NULL,
+	"quant_mL" REAL NOT NULL,
 	PRIMARY KEY("ingredientId","recipeId")
 );
 
