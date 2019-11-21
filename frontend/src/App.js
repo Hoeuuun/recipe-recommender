@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-//import './App.css';
+// import './index.css';
 import {SearchPage} from "./components/SearchPage";
 import {Header} from "./components/Header";
 
