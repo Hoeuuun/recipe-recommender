@@ -63,7 +63,7 @@ export function SearchPage(props) {
    return (
        <div>
            <div className="field">
-               <label> Recipe Searcher. </label>
+               <label> Recipe Search Section. </label>
            </div>
            <input
                type="text"
