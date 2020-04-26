@@ -1,0 +1,15 @@
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:10:53] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /search?q=eggs&minTime=0&maxTime=9999 HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/250x250/870530.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/560x315/4254003.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/560x315/1132117.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/560x315/4253976.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/560x315/4473754.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/250x250/396821.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/250x250/826931.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/250x250/992698.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/250x250/855842.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/560x315/4465319.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [25/Apr/2020 17:11:09] "[37mGET /data/allrecipes/images/userphotos/250x250/985099.jpg HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
