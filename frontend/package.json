@@ -1,5 +1,5 @@
 {
-  "name": "recipe-recc",
+  "name": "recipe-recommender",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
