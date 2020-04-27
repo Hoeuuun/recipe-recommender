@@ -1,4 +1,6 @@
-from flask import Flask, send_from_directory, request, jsonify
+from flask import Flask, send_from_directory, request, jsonify, abort
+from flask_cors import CORS
+
 from sqlite_helper import search_by_ingredients
 import os, sqlite3
 import pickle
@@ -7,6 +9,7 @@ INGREDIENT_INDEX = None
 
 # Create an instance of Flask class and call it app
 app = Flask(__name__, static_url_path='/Users/hoeunsim2/Dropbox/dev/recipe-recommender')
+CORS(app)
 
 
 # The default page
@@ -76,7 +79,7 @@ if __name__ == "__main__":
     with open('ingredient_index.pickle', 'rb') as index_file:
         INGREDIENT_INDEX = pickle.load(index_file)
 
-    import logging
-    logging.basicConfig(filename='access.log', level=logging.DEBUG)
+    # import logging
+    # logging.basicConfig(filename='access.log', level=logging.DEBUG)
 
     app.run(host='0.0.0.0', port=5000, threaded=True)
