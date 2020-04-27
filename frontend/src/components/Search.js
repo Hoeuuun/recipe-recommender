@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {DebounceInput} from "react-debounce-input";
-import {restRequest} from "../RestClient";
+import {restRequest, serverAddress} from "../RestClient";
 
 
 export function Search() {
@@ -48,6 +48,8 @@ export function Search() {
             {searchResults.map(result => (
                 <div key={result.id}>
                     <h4>{result.title}</h4>
+                    <img src={`${serverAddress}/images/userphotos/${result.image}`}/>
+
                     {/*<img*/}
                     {/*    src={`${result.thumbnail.path}/portrait_incredible.${*/}
                     {/*        result.thumbnail.extension*/}

@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask, send_from_directory, request, jsonify, abort
 from flask_cors import CORS
 
@@ -5,10 +7,13 @@ from sqlite_helper import search_by_ingredients
 import os, sqlite3
 import pickle
 
+_logger = logging.getLogger(__name__)
+
 INGREDIENT_INDEX = None
 
 # Create an instance of Flask class and call it app
-app = Flask(__name__, static_url_path='/Users/hoeunsim2/Dropbox/dev/recipe-recommender')
+this_folder = os.path.dirname(os.path.realpath(__file__))
+app = Flask(__name__, static_url_path=os.path.abspath(os.path.join(this_folder, '../data/allrecipes')))
 CORS(app)
 
 
@@ -36,7 +41,7 @@ def send_photos(path):
 
 @app.route('/images/<path:path>')
 def send_images(path):
-    return send_from_directory('../images', path)
+    return send_from_directory('../data/allrecipes/images', path)
 
 
 @app.route("/search")
