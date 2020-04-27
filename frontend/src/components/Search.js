@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {DebounceInput} from "react-debounce-input";
 import {restRequest} from "../RestClient";
 
+
 export function Search() {
     // State and setter search input
     const [searchInput, setSearchInput] = useState(false);
@@ -16,6 +17,7 @@ export function Search() {
         setSearchInput(input);
 
         restRequest(`search?q=${input}`).then((response) => {
+            // This is executed when request returns data.
             setIsSearching(false);
             if (response) {
                 setSearchResults(response.data);
@@ -40,6 +42,7 @@ export function Search() {
             />
 
             {isSearching && searchInput && <h1>Searching for: {searchInput}</h1>}
+
             {!isSearching && searchInput && <h1>Results for: {searchInput}</h1>}
 
             {searchResults.map(result => (
