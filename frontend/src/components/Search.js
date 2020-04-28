@@ -17,7 +17,7 @@ export function Search() {
         setSearchInput(input);
 
         restRequest(`search?q=${input}`).then((response) => {
-            // This is executed when request returns data.
+            // This is executed when request returns data
             setIsSearching(false);
             if (response) {
                 setSearchResults(response.data);
@@ -29,8 +29,6 @@ export function Search() {
 
     // Call hook with current search input, but
     // wait 500ms since it was last called to return the latest value
-    /// const debouncedSearchInput = useDebounce(searchInput, 500);
-
     // UI with search box and results
     return (
         <div>
@@ -41,20 +39,18 @@ export function Search() {
                 onChange={e => onInputEntered(e.target.value)}
             />
 
-            {isSearching && searchInput && <h1>Searching for: {searchInput}</h1>}
+            {isSearching && searchInput && <h1>Searching for: {searchInput}...</h1>}
 
             {!isSearching && searchInput && <h1>Results for: {searchInput}</h1>}
 
             {searchResults.map(result => (
                 <div key={result.id}>
                     <h4>{result.title}</h4>
-                    <img src={`${serverAddress}/images/userphotos/${result.image}`}/>
+                    <img src={`${serverAddress}/images/userphotos/${result.image}`}
+                         alt={`${result.title}`}
+                         height='250'
+                         width='250'/>
 
-                    {/*<img*/}
-                    {/*    src={`${result.thumbnail.path}/portrait_incredible.${*/}
-                    {/*        result.thumbnail.extension*/}
-                    {/*    }`}*/}
-                    {/*/>*/}
                 </div>
             ))}
         </div>
