@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '106.25%', // 16:9
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -47,11 +47,22 @@ export function SearchResultCard(props) {
         setExpanded(!expanded);
     };
 
+    function convertMinsToHrs(mins) {
+        let h = Math.floor(mins/60);
+        let m = mins % 60;
+
+        h = h < 1 ? '' : h + ' hr ';
+        m = m < 1 ? '' : m + ' min';
+
+        return `${h} ${m}`;
+    }
+
     return (
         <Card className={classes.root}>
             <CardHeader
                 title={props.title}
-                subheader={`Rating: ${props.rating}/100  |  Time: ${props.time} M`}
+                // subheader={`Rating: ${props.rating}/100  |  Time: ${props.time} `}
+                subheader={`Time: ${convertMinsToHrs(props.time)}`}
             />
             <CardMedia className={classes.media}
                        image={`${serverAddress}/images/userphotos/${props.image}`}
@@ -82,7 +93,7 @@ export function SearchResultCard(props) {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>Method:</Typography>
+                        <Typography paragraph>Directions:</Typography>
                         <Typography paragraph>
                             Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
                             minutes.
