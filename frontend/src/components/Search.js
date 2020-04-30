@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {DebounceInput} from "react-debounce-input";
 import {restRequest, serverAddress} from "../RestClient";
 import StackGrid from "react-stack-grid";
+import {SearchResultCard} from "./SearchResultCard";
 
 
 export function Search() {
@@ -60,18 +61,15 @@ export function Search() {
             {/*    <div key="key3">Item 3</div>*/}
             {/*</StackGrid>*/}
 
-            {searchResults.map((result, index) => (
+            <StackGrid columnWidth={250}>
+                {searchResults.map((result) => (
 
-                <div key={result.id}
-                     style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
-                    <h4>{result.title}</h4>
-                    <img src={`${serverAddress}/images/userphotos/${result.image}`}
-                         alt={`${result.title}`}
-                         height='250'
-                         width='250'/>
-                         <h1>curr index:{index}</h1>
-                </div>
-            ))}
+                <SearchResultCard id={result.id % 3}
+                                  title={result.title}
+                                  image={result.image}
+                />
+                ))}
+            </StackGrid>
         </div>
     );
 }
