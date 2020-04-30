@@ -55,18 +55,16 @@ export function Search() {
 
             {!isSearching && searchInput && <h1>Results for: {searchInput}</h1>}
 
-            {/*<StackGrid columnWidth={150}>*/}
-            {/*    <div key="key1">Item 1</div>*/}
-            {/*    <div key="key2">Item 2</div>*/}
-            {/*    <div key="key3">Item 3</div>*/}
-            {/*</StackGrid>*/}
-
             <StackGrid columnWidth={250}>
                 {searchResults.map((result) => (
 
-                <SearchResultCard id={result.id % 3}
+                <SearchResultCard id={result.id}
                                   title={result.title}
                                   image={result.image}
+                                  rating={result.rating}
+                                  time={result.time}
+                                  // url={result.url}
+
                 />
                 ))}
             </StackGrid>
