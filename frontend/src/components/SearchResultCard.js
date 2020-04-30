@@ -42,17 +42,4 @@ export function SearchResultCard(props) {
 
         </Card>
     );
-    /*
-    return (
-        <div key={props.id}
-             style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
-            <h4>{props.title}</h4>
-            <img src={`${serverAddress}/images/userphotos/${props.image}`}
-                 alt={`${props.title}`}
-                 height='250'
-                 width='250'/>
-            {<h1>curr index:{index}</h1>}
-        </div>
-    );
-*/
 }
