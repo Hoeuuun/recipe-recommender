@@ -3,6 +3,8 @@ import {DebounceInput} from "react-debounce-input";
 import {restRequest, serverAddress} from "../RestClient";
 import StackGrid from "react-stack-grid";
 import {SearchResultCard} from "./SearchResultCard";
+import CardHeader from "@material-ui/core/CardHeader";
+import StarRatings from 'react-star-ratings';
 
 
 export function Search() {
@@ -30,16 +32,7 @@ export function Search() {
         });
 
     }
-
-    const Columns = () =>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
-            <div>Column 1</div>
-            <div>Column 2</div>
-            <div>Column 3</div>
-        </div>
-
-
-    // Call hook with current search input, but
+// Call hook with current search input, but
     // wait 500ms since it was last called to return the latest value
     // UI with search box and results
     return (
@@ -57,13 +50,15 @@ export function Search() {
 
 
             <StackGrid columnWidth={250}>
+
                 {searchResults.map((result) => (
 
                 <SearchResultCard id={result.id}
                                   title={result.title}
                                   image={result.image}
-                                  rating={result.rating}
                                   time={result.time}
+                                  rating={result.rating}
+                                  review_count={result.review_count}
                                   // url={result.url}
 
                 />

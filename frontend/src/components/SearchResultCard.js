@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
+import StarRatings from 'react-star-ratings';
 
 import clsx from 'clsx';
 
@@ -57,6 +58,11 @@ export function SearchResultCard(props) {
         return `${h} ${m}`;
     }
 
+    // in DB, rating = int((data['rating_stars'] / 5) * 100)
+    // convert int to 5-star rating
+    const rating = props.rating / 20.0;
+    // console.log("rating: " + rating);
+
     return (
         <Card className={classes.root}>
             <CardHeader
@@ -74,12 +80,25 @@ export function SearchResultCard(props) {
                 </Typography>
             </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
+                    <StarRatings
+                        rating={rating}
+                        starDimension="1.3em"
+                        starSpacing=".2em"
+                    />
+                    <Typography color="textSecondary" component="p">
+                        <div style={{fontSize:"1em",
+                                    position:"relative",
+                                    paddingTop:".5em",
+                                    paddingLeft:".5em"
+                                    }}>({props.review_count})</div>
+                    </Typography>
+
+                    {/*<IconButton aria-label="add to favorites">*/}
+                    {/*    <FavoriteIcon />*/}
+                    {/*</IconButton>*/}
+                    {/*<IconButton aria-label="share">*/}
+                    {/*    <ShareIcon />*/}
+                    {/*</IconButton>*/}
                     <IconButton
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,
