@@ -55,7 +55,6 @@ export function Search() {
 
             {!isSearching && searchInput && <h1>Results for: {searchInput}</h1>}
 
-
             <StackGrid columnWidth={250}>
                 {searchResults.map((result) => (
 
