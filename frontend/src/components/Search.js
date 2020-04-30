@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {DebounceInput} from "react-debounce-input";
 import {restRequest, serverAddress} from "../RestClient";
+import StackGrid from "react-stack-grid";
 
 
 export function Search() {
@@ -11,21 +12,31 @@ export function Search() {
     // State and setter for search status (loading request)
     const [isSearching, setIsSearching] = useState(false);
 
+
+
     function onInputEntered(input) {
-        console.log(input);
         setIsSearching(input);
         setSearchInput(input);
 
-        restRequest(`search?q=${input}`).then((response) => {
+        input = input.split(" ").join(",");
+        restRequest(`search?q=${input}`).then(response => {
             // This is executed when request returns data
+
             setIsSearching(false);
             if (response) {
                 setSearchResults(response.data);
             }
         });
 
-        // fetch()
     }
+
+    const Columns = () =>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
+            <div>Column 1</div>
+            <div>Column 2</div>
+            <div>Column 3</div>
+        </div>
+
 
     // Call hook with current search input, but
     // wait 500ms since it was last called to return the latest value
@@ -43,14 +54,22 @@ export function Search() {
 
             {!isSearching && searchInput && <h1>Results for: {searchInput}</h1>}
 
-            {searchResults.map(result => (
-                <div key={result.id}>
+            {/*<StackGrid columnWidth={150}>*/}
+            {/*    <div key="key1">Item 1</div>*/}
+            {/*    <div key="key2">Item 2</div>*/}
+            {/*    <div key="key3">Item 3</div>*/}
+            {/*</StackGrid>*/}
+
+            {searchResults.map((result, index) => (
+
+                <div key={result.id}
+                     style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 20 }}>
                     <h4>{result.title}</h4>
                     <img src={`${serverAddress}/images/userphotos/${result.image}`}
                          alt={`${result.title}`}
                          height='250'
                          width='250'/>
-
+                         <h1>curr index:{index}</h1>
                 </div>
             ))}
         </div>
