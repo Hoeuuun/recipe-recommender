@@ -63,6 +63,9 @@ export function SearchResultCard(props) {
     const rating = props.rating / 20.0;
     // console.log("rating: " + rating);
 
+    const description = props.description
+    console.log(description);
+
     return (
         <Card className={classes.root}>
             <CardHeader
@@ -75,8 +78,7 @@ export function SearchResultCard(props) {
             />
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    {/*{props.url}*/}
-                    "TODO: Add ingredients list"
+                    {description}
                 </Typography>
             </CardContent>
                 <CardActions disableSpacing>

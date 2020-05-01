@@ -58,6 +58,7 @@ export function Search() {
                                   time={result.time}
                                   rating={result.rating}
                                   review_count={result.review_count}
+                                  description={result.description}
                                   // url={result.url}
 
                 />

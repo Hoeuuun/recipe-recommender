@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS "Recipe" (
 	"review_count" INTEGER,
 	"time"	INTEGER,
 	"image" TEXT,
-	"url" TEXT
+	"url" TEXT,
+	"description" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "RecipeIngredients" (
@@ -29,7 +30,7 @@ CREATE TABLE IF NOT EXISTS "Ingredient" (
 CREATE TABLE IF NOT EXISTS "RecipeSteps" (
 	"recipeId"	INTEGER NOT NULL,
 	"stepNumber"	INTEGER NOT NULL,
-	"description"	TEXT NOT NULL,
+	"instruction"	TEXT NOT NULL,
 	PRIMARY KEY("recipeId","stepNumber")
 );
 
@@ -42,7 +43,7 @@ CREATE INDEX IF NOT EXISTS "recipe_index" ON "Recipe" (
 	"rating"	ASC,
 	"time"	ASC,
 	"review_count" ASC,
-  "title"	ASC
+    "title"	ASC
 );
 
 CREATE INDEX IF NOT EXISTS "ingredient_name" ON "Ingredient" (
