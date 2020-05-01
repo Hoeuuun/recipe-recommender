@@ -59,6 +59,7 @@ export function Search() {
                                   rating={result.rating}
                                   review_count={result.review_count}
                                   description={result.description}
+                                  ingredients={result.ingredients}
                                   // url={result.url}
 
                 />

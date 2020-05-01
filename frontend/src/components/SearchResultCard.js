@@ -14,6 +14,8 @@ import Collapse from "@material-ui/core/Collapse";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import StarRatings from 'react-star-ratings';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Modal from 'react-modal';
 
 import clsx from 'clsx';
 
@@ -40,6 +42,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const customStyles = {
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)',
+
+    },
+    overlay: {zIndex: 1000}
+};
+
 export function SearchResultCard(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -65,6 +80,23 @@ export function SearchResultCard(props) {
 
     const description = props.description
     console.log(description);
+
+
+    // Modal (pop-up) effect
+    var subtitle;
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
+     function afterOpenModal() {
+         subtitle.style.color = 'black';
+     }
+
+    function closeModal() {
+        setIsOpen(false);
+    }
 
     return (
         <Card className={classes.root}>
@@ -105,22 +137,25 @@ export function SearchResultCard(props) {
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,
                         })}
-                        onClick={handleExpandClick}
+                        onClick={openModal}
                         aria-expanded={expanded}
                         aria-label="show more"
                     >
                         <ExpandMoreIcon />
                     </IconButton>
                 </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
-                    <CardContent>
-                        <Typography paragraph>Directions:</Typography>
-                        <Typography paragraph>
-                            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                            minutes.
-                        </Typography>
-                    </CardContent>
-                </Collapse>
+                <IconButton onClick={openModal}></IconButton>
+                    <Modal
+                        isOpen={modalIsOpen}
+                        // onAfterOpen={afterOpenModal}
+                        onRequestClose={closeModal}
+                        style={customStyles}
+                        contentLabel="Example Modal"
+                    >
+                    mmm, tasty
+                    </Modal>
+                {/*</IconButton>*/}
+
         </Card>
     );
 }
