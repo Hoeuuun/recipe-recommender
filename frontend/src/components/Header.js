@@ -27,6 +27,7 @@ const MainHeader = styled.div`
   margin: 4em 1em 4em 1em;
   padding: 5px 16px 5px 16px;
   z-index: 1;
+  border-radius: 1.5px;
 
   
  
@@ -43,6 +44,7 @@ export const SubHeader= styled.div`
   padding: 5px 16px 5px 16px;
   white-space: nowrap;
   z-index: 1;
+  border-radius: 1.5px;
 `;
 
 /* Recipe search button */
@@ -60,6 +62,7 @@ export const SearchButton = styled.button`
     margin: 28em 4em 28em 4em;
     border: 2px solid #fff;
     z-index: 0;
+    border-radius: 1.5px;
    
     &:hover, &:active {
         color: #000033;

@@ -16,7 +16,7 @@ export const BrandText = styled.h1`
 
 export function NavBar() {
     return (
-        <Navbar collapseOnSelect expand="md" bg="secondary" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg=""  variant="light">
             <Navbar.Brand href="#home"><BrandText>Recipe Recommender</BrandText></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
             <Navbar.Collapse className="responsive-navbar-nav">
