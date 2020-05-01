@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {serverAddress} from "../RestClient";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -19,7 +19,7 @@ import Modal from 'react-modal';
 
 import clsx from 'clsx';
 
-const useStyles = makeStyles((theme) => ({
+const useCardStyle = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
     },
@@ -42,36 +42,102 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const useModalStyle = makeStyles((theme) => ({
+    root: {
+        maxWidth: '80%',
+    },
+    media: {
+       // width: '80%',
+       // maxHeight: '40%',
+     //   paddingTop: '106.25%', // 16:9
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+    },
+    avatar: {
+        backgroundColor: red[500],
+    },
+}));
+
 const customStyles = {
-    content : {
-        top                   : '50%',
-        left                  : '50%',
-        right                 : 'auto',
-        bottom                : 'auto',
-        marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)',
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        maxWidth: '70%',
+        maxHeight: '70%'
 
     },
     overlay: {zIndex: 1000}
 };
 
+function convertMinsToHrs(mins) {
+    let h = Math.floor(mins / 60);
+    let m = mins % 60;
+
+    h = h < 1 ? '' : h + ' hr ';
+    m = m < 1 ? '' : m + ' min';
+
+    return `${h} ${m}`;
+}
+
+function SearchResultBrief(props) {
+    const classes = props.classes;
+    return (
+        <div onClick={props.onClick}>
+            <CardHeader
+                title={props.title}
+                subheader={`Time: ${convertMinsToHrs(props.time)}`}
+            />
+            <CardMedia className={classes.media}
+                       image={`${serverAddress}/images/userphotos/${props.image}`}
+            />
+            <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {props.description}
+                </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+                <StarRatings
+                    rating={props.rating}
+                    starDimension="1.3em"
+                    starSpacing=".2em"
+                />
+                <Typography color="textSecondary" component="p">
+                    <div style={{
+                        fontSize: "1em",
+                        position: "relative",
+                        paddingTop: ".5em",
+                        paddingLeft: ".5em"
+                    }}>({props.review_count})
+                    </div>
+                </Typography>
+
+            </CardActions>
+
+
+        </div>
+    );
+}
+
 export function SearchResultCard(props) {
-    const classes = useStyles();
+    const classes = useCardStyle();
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
-    function convertMinsToHrs(mins) {
-        let h = Math.floor(mins/60);
-        let m = mins % 60;
-
-        h = h < 1 ? '' : h + ' hr ';
-        m = m < 1 ? '' : m + ' min';
-
-        return `${h} ${m}`;
-    }
 
     // in DB, rating = int((data['rating_stars'] / 5) * 100)
     // convert int to 5-star rating
@@ -81,18 +147,12 @@ export function SearchResultCard(props) {
     const description = props.description
     console.log(description);
 
-
-    // Modal (pop-up) effect
-    var subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
     function openModal() {
         setIsOpen(true);
-    }
 
-     function afterOpenModal() {
-         subtitle.style.color = 'black';
-     }
+    }
 
     function closeModal() {
         setIsOpen(false);
@@ -100,61 +160,26 @@ export function SearchResultCard(props) {
 
     return (
         <Card className={classes.root}>
-            <CardHeader
-                title={props.title}
-                // subheader={`Rating: ${props.rating}/100  |  Time: ${props.time} `}
-                subheader={`Time: ${convertMinsToHrs(props.time)}`}
-            />
-            <CardMedia className={classes.media}
-                       image={`${serverAddress}/images/userphotos/${props.image}`}
-            />
-            <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    {description}
-                </Typography>
-            </CardContent>
-                <CardActions disableSpacing>
-                    <StarRatings
-                        rating={rating}
-                        starDimension="1.3em"
-                        starSpacing=".2em"
-                    />
-                    <Typography color="textSecondary" component="p">
-                        <div style={{fontSize:"1em",
-                                    position:"relative",
-                                    paddingTop:".5em",
-                                    paddingLeft:".5em"
-                                    }}>({props.review_count})</div>
-                    </Typography>
+            <SearchResultBrief {...props}
+                              onClick={openModal}
+                              classes={useCardStyle()}/>
+            <Modal
+                isOpen={modalIsOpen}
+                // onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+            >
+                <SearchResultBrief {...props}
+                                  onClick={closeModal}
+                                  classes={useModalStyle()}/>
 
-                    {/*<IconButton aria-label="add to favorites">*/}
-                    {/*    <FavoriteIcon />*/}
-                    {/*</IconButton>*/}
-                    {/*<IconButton aria-label="share">*/}
-                    {/*    <ShareIcon />*/}
-                    {/*</IconButton>*/}
-                    <IconButton
-                        className={clsx(classes.expand, {
-                            [classes.expandOpen]: expanded,
-                        })}
-                        onClick={openModal}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                    >
-                        <ExpandMoreIcon />
-                    </IconButton>
-                </CardActions>
-                <IconButton onClick={openModal}></IconButton>
-                    <Modal
-                        isOpen={modalIsOpen}
-                        // onAfterOpen={afterOpenModal}
-                        onRequestClose={closeModal}
-                        style={customStyles}
-                        contentLabel="Example Modal"
-                    >
-                    mmm, tasty
-                    </Modal>
-                {/*</IconButton>*/}
+                <CardContent>
+                    <h2>Ingredients</h2>
+                    <ul>
+                        {props.ingredients.map(ingrdient => <li>{ingrdient}</li>)}
+                    </ul>
+                </CardContent>
+            </Modal>
 
         </Card>
     );
