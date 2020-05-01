@@ -71,15 +71,17 @@ def get_recipe_by_id(conn, id):
         time = recipe[4]
         image = recipe[5]
         url = recipe[6]
+        description = recipe[7]
 
-        quantity = recipe[9]
+        quantity = recipe[10]
 
         ingredients = []
 
         for ing in recipes:
-            ingredients.append(ing[11])
+            ingredients.append(ing[16])
 
-    recipe_object = {'id': id, 'title': title, 'rating': rating, 'review_count': review_count, 'time': time, 'image': image, 'url': url,
+    recipe_object = {'id': id, 'title': title, 'rating': rating, 'review_count': review_count,
+                     'time': time, 'image': image, 'url': url, 'description': description,
                      'quantity': quantity, 'ingredients': ingredients}
 
     return recipe_object
