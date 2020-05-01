@@ -32,6 +32,12 @@ export function Search() {
         });
 
     }
+
+    function adaptResultToProps(result) {
+        result.rating = result.rating / 20.0;
+        return result;
+    }
+
 // Call hook with current search input, but
     // wait 500ms since it was last called to return the latest value
     // UI with search box and results
@@ -60,9 +66,8 @@ export function Search() {
                                   review_count={result.review_count}
                                   description={result.description}
                                   ingredients={result.ingredients}
-                                  // url={result.url}
-
                 />
+
                 ))}
             </StackGrid>
         </div>
