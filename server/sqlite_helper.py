@@ -1,6 +1,7 @@
 import sqlite3
 import re
 import pickle
+from typing import List
 
 from ingredients_index import search_recipes_by_ingredient_words
 
@@ -49,6 +50,7 @@ def get_recipe_list(conn, recipe_ids):
 
 
 def get_recipe_by_id(conn, id):
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     query = f"""
         SELECT * FROM Recipe
@@ -56,33 +58,44 @@ def get_recipe_by_id(conn, id):
                             ON Recipe.id = RecipeIngredients.recipeId
                         JOIN Ingredient 
                             ON RecipeIngredients.ingredientId = Ingredient.id
+                        JOIN RecipeSteps 
+                            ON Recipe.id = RecipeSteps.recipeId
                         WHERE Recipe.id = {id};
         """
     #print(query)
     cursor.execute(query)
-
     recipes = cursor.fetchall()
+    ingridients_by_id = {}
+    instructions_by_stepNumber = {}
 
     for recipe in recipes:
-        id = recipe[0]
-        title = recipe[1]
-        rating = recipe[2]
-        review_count = recipe[3]
-        time = recipe[4]
-        image = recipe[5]
-        url = recipe[6]
-        description = recipe[7]
+        id = recipe['id']
+        title = recipe['title']
+        rating = recipe['rating']
+        review_count = recipe['review_count']
+        time = recipe['time']
+        image = recipe['image']
+        url = recipe['url']
+        description = recipe['description']
+        instruction = recipe['instruction']
+        ingredient = recipe['name']
 
-        quantity = recipe[10]
+        quantity = recipe['quantity']
 
-        ingredients = []
+        step_number = recipe['stepNumber']
 
-        for ing in recipes:
-            ingredients.append(ing[16])
+        ingridients_by_id[recipe['ingredientId']] = ingredient
+        instructions_by_stepNumber[recipe['stepNumber']] = instruction
+
+    ingredients = list(ingridients_by_id.values())
+    instructions = []
+    for i in range(max(instructions_by_stepNumber.keys()) + 1):
+        instructions.append(instructions_by_stepNumber[i])
+
 
     recipe_object = {'id': id, 'title': title, 'rating': rating, 'review_count': review_count,
                      'time': time, 'image': image, 'url': url, 'description': description,
-                     'quantity': quantity, 'ingredients': ingredients}
+                     'quantity': quantity, 'ingredients': ingredients, 'directions': instructions}
 
     return recipe_object
 

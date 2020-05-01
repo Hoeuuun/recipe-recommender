@@ -66,6 +66,7 @@ export function Search() {
                                   review_count={result.review_count}
                                   description={result.description}
                                   ingredients={result.ingredients}
+                                  directions={result.directions}
                 />
 
                 ))}

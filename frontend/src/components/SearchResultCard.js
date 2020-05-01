@@ -176,8 +176,12 @@ export function SearchResultCard(props) {
                 <CardContent>
                     <h2>Ingredients</h2>
                     <ul>
-                        {props.ingredients.map(ingrdient => <li>{ingrdient}</li>)}
+                        {props.ingredients.map(ingredient => <li>{ingredient}</li>)}
                     </ul>
+                    <h2>Directions</h2>
+                    <ol>
+                        {props.directions.map(direction => <li>{direction}</li>)}
+                    </ol>
                 </CardContent>
             </Modal>
 
