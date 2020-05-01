@@ -44,6 +44,10 @@ const SubmitButton = styled(SearchButton)`
 
 
 export function Contact() {
+    function handleSubmit() {
+        // TODO
+    }
+
     return (
         <div
             style={{
@@ -81,15 +85,15 @@ export function Contact() {
                     <Form.Group controlId={"formGridMessage"} >
                         <Form.Control as={"textarea"} rows={"6"} placeholder={"Message"} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" className={"float-right"}>
+                    <Button variant="primary"
+                            type="submit"
+                            className={"float-right"}
+                            onClick={e => handleSubmit(e)}>
                         <SubmitButton>Send Message</SubmitButton>
                     </Button>
                 </Form>
 
                 </Fade>
         </div>
-
-
-
     );
 }

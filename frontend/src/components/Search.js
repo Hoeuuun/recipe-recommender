@@ -4,8 +4,16 @@ import {restRequest, serverAddress} from "../RestClient";
 import StackGrid from "react-stack-grid";
 import {SearchResultCard} from "./SearchResultCard";
 import CardHeader from "@material-ui/core/CardHeader";
-import StarRatings from 'react-star-ratings';
+// import StarRatings from 'react-star-ratings';
+import {MDBCol, MDBIcon, MDBInput} from "mdbreact";
+import Input from "@material-ui/core/Input";
+import styled, {css} from "styled-components";
+import {Title} from "./Contact";
+import Fade from "react-reveal/Fade";
 
+const SearchTitle = styled(Title)`
+  background-color: lightgray;
+`;
 
 export function Search() {
     // State and setter search input
@@ -14,7 +22,6 @@ export function Search() {
     const [searchResults, setSearchResults] = useState([]);
     // State and setter for search status (loading request)
     const [isSearching, setIsSearching] = useState(false);
-
 
 
     function onInputEntered(input) {
@@ -38,16 +45,36 @@ export function Search() {
         return result;
     }
 
-// Call hook with current search input, but
-    // wait 500ms since it was last called to return the latest value
-    // UI with search box and results
     return (
-        <div>
+        <div style={{padding:"30px 90px 90px 100px"}}>
+            <Fade bottom>
+                <div
+                    style={{
+                        width: "50%",
+                        marginLeft: "25%"
+
+                    }}>
+                    <SearchTitle>Recipes</SearchTitle>
+                    <hr
+                        style={{
+                            width: "150px",
+                            border: "1px solid #828282"
+                        }}/>
+                </div>
+                <MDBInput label="Enter ingredients"
+                      outline icon color="black"
+                      outline icon="search"
+                      outline size="lg"
+                />
+
+            </Fade>
+
             <DebounceInput
                 placeholder="Enter ingredients"
                 minLength={3}
                 debounceTimeout={200}
                 onChange={e => onInputEntered(e.target.value)}
+
             />
 
             {isSearching && searchInput && <h1>Searching for: {searchInput}...</h1>}

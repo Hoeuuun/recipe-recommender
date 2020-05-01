@@ -8,7 +8,8 @@ export const LogoText = styled(BrandText)`
     color: #ffffff;
     padding-top: 2em;
     padding-bottom: 1em;
-
+    border-radius: 1.5px;
+    letter-spacing: .3em;
 `;
 
 const Copyright = styled.p`
