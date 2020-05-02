@@ -15,6 +15,23 @@ const SearchTitle = styled(Title)`
   background-color: lightgray;
 `;
 
+function debounce(fn, wait) {
+    var timeout;
+
+    return function exec() {
+        var self = this;
+        var args = arguments;
+
+        var doIt = () => {
+            timeout = null;
+            fn.apply(self, args)
+        }
+
+        clearTimeout(timeout)
+        timeout = setTimeout(doIt, wait);
+    }
+}
+
 export function Search() {
     // State and setter search input
     const [searchInput, setSearchInput] = useState(false);
@@ -25,20 +42,21 @@ export function Search() {
 
 
     function onInputEntered(input) {
+        console.log(input);
         setIsSearching(input);
         setSearchInput(input);
 
         input = input.split(" ").join(",");
         restRequest(`search?q=${input}`).then(response => {
             // This is executed when request returns data
-
             setIsSearching(false);
             if (response) {
                 setSearchResults(response.data);
             }
         });
-
     }
+
+    onInputEntered = debounce(onInputEntered, 200)
 
     function adaptResultToProps(result) {
         result.rating = result.rating / 20.0;
@@ -65,17 +83,18 @@ export function Search() {
                       outline icon color="black"
                       outline icon="search"
                       outline size="lg"
+                          onChange={e => onInputEntered(e.target.value)}
                 />
 
             </Fade>
 
-            <DebounceInput
-                placeholder="Enter ingredients"
-                minLength={3}
-                debounceTimeout={200}
-                onChange={e => onInputEntered(e.target.value)}
+            {/*<DebounceInput*/}
+            {/*    placeholder="Enter ingredients"*/}
+            {/*    minLength={3}*/}
+            {/*    debounceTimeout={200}*/}
+            {/*    onChange={e => onInputEntered(e.target.value)}*/}
 
-            />
+            {/*/>*/}
 
             {isSearching && searchInput && <h1>Searching for: {searchInput}...</h1>}
 

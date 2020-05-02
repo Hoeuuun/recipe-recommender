@@ -142,10 +142,8 @@ export function SearchResultCard(props) {
     // in DB, rating = int((data['rating_stars'] / 5) * 100)
     // convert int to 5-star rating
     const rating = props.rating / 20.0;
-    // console.log("rating: " + rating);
 
     const description = props.description
-    console.log(description);
 
     const [modalIsOpen, setIsOpen] = React.useState(false);
 
