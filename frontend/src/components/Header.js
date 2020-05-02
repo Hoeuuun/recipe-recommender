@@ -64,27 +64,27 @@ export const SearchButton = styled.button`
     border: 2px solid #fff;
    // z-index: 0;
     border-radius: 1.5px;
-   
+    
+    outline: none;
+    
     &:hover, &:active {
         color: #000033;
         border-color: white;
         background-color: white;
+        outline: none;
     }
      
 `;
 
 export function Header() {
-    function onclick() {
-        alert('fuck');
-    }
     return (
         <HeroImage>
-        <div class="col-12 col-md-8 text-center justify-content-md-center offset-2">
+        <div id="Header" class="col-12 col-md-8 text-center justify-content-md-center offset-2">
             <MainHeader>RECIPE RECOMMENDER</MainHeader>
         </div>
         <div class="col-6 col-md-4 text-center offset-4">
             <SubHeader>Search 87k+ Recipes</SubHeader>
-            <Link to="search" smooth={true}>
+            <Link to="Search" smooth={true}>
             <SearchButton>Find a Recipe</SearchButton>
             </Link>
         </div>

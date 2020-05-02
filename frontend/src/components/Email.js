@@ -87,7 +87,7 @@ export function Contact() {
                     <Button variant="primary"
                             type="submit"
                             className={"float-right"}
-                        >
+                    >
                         <SubmitButton>Send Message</SubmitButton>
                     </Button>
                 </Form>

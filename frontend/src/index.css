@@ -30,4 +30,5 @@
     color: black;
 
 }
-
+/* Buttons */
+button:focus { outline:0 !important; }

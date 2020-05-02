@@ -64,7 +64,7 @@ export function Search() {
     }
 
     return (
-        <div id="search" style={{padding:"30px 90px 90px 100px"}}>
+        <div id="Search" style={{padding:"30px 90px 90px 100px"}}>
             <Fade bottom>
                 <div
                     style={{
@@ -96,9 +96,9 @@ export function Search() {
 
             {/*/>*/}
 
-            {isSearching && searchInput && <h1>Searching for: {searchInput}...</h1>}
+            {isSearching && searchInput && <h1 align="center">Searching for: {searchInput}...</h1>}
 
-            {!isSearching && searchInput && <h1>Results for: {searchInput}</h1>}
+            {!isSearching && searchInput && <h1 align="center">Results for: {searchInput}</h1>}
 
             <StackGrid columnWidth={250}>
 
