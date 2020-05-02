@@ -64,7 +64,7 @@ export function Search() {
     }
 
     return (
-        <div style={{padding:"30px 90px 90px 100px"}}>
+        <div id="search" style={{padding:"30px 90px 90px 100px"}}>
             <Fade bottom>
                 <div
                     style={{

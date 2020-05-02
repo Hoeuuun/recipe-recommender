@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 
 /* Header image */
@@ -11,7 +12,7 @@ const HeroImage = styled.div`
     background-size: cover;
     background-attachment: fixed;
     position: relative;
-    z-index: -1;
+  //  z-index: -1;
 `;
 
 /* Hero text */
@@ -26,7 +27,7 @@ const MainHeader = styled.div`
   font-weight: bold;
   margin: 4em 1em 4em 1em;
   padding: 5px 16px 5px 16px;
-  z-index: 1;
+//  z-index: 1;
   border-radius: 1.5px;
 
   
@@ -43,7 +44,7 @@ export const SubHeader= styled.div`
   margin: 15em 1em 15em 1em;
   padding: 5px 16px 5px 16px;
   white-space: nowrap;
-  z-index: 1;
+  //z-index: 1;
   border-radius: 1.5px;
 `;
 
@@ -61,7 +62,7 @@ export const SearchButton = styled.button`
     padding: 12px 26px 12px 26px;
     margin: 28em 4em 28em 4em;
     border: 2px solid #fff;
-    z-index: 0;
+   // z-index: 0;
     border-radius: 1.5px;
    
     &:hover, &:active {
@@ -73,6 +74,9 @@ export const SearchButton = styled.button`
 `;
 
 export function Header() {
+    function onclick() {
+        alert('fuck');
+    }
     return (
         <HeroImage>
         <div class="col-12 col-md-8 text-center justify-content-md-center offset-2">
@@ -80,7 +84,9 @@ export function Header() {
         </div>
         <div class="col-6 col-md-4 text-center offset-4">
             <SubHeader>Search 87k+ Recipes</SubHeader>
-            <SearchButton href="#search">Find a Recipe</SearchButton>
+            <Link to="search" smooth={true}>
+            <SearchButton>Find a Recipe</SearchButton>
+            </Link>
         </div>
         </HeroImage>
     );
