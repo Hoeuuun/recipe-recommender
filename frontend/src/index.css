@@ -36,3 +36,17 @@ button:focus { outline:0 !important; }
 span {
     margin: 0 25px;
 }
+
+/* Search Sorting */
+.row {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*.block {*/
+/*    width: 100px;*/
+/*    display: inline-block;*/
+/*}​*/

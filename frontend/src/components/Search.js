@@ -11,6 +11,7 @@ import styled, {css} from "styled-components";
 import {Title} from "./Contact";
 import Fade from "react-reveal/Fade";
 import {Sort} from "./Sort";
+import SortIcon from '@material-ui/icons/Sort';
 
 const SearchTitle = styled(Title)`
   background-color: lightgray;
@@ -152,24 +153,27 @@ export function Search() {
                       outline size="lg"
                           onChange={e => debouncedSetSearchInput(e.target.value)}
                 />
-                <Sort
-                    title="Rating"
-                    options={['Highest', 'Lowest']}
-                    onItemSelected={handleRatingSortChange}
-                />
 
-                <Sort
-                    title="Review"
-                    options={['Highest', 'Lowest']}
-                    onItemSelected={handleReviewSortChange}
-                />
+                <div className="row">
+                    <Sort
+                        title="Rating"
+                        options={['Highest', 'Lowest']}
+                        onItemSelected={handleRatingSortChange}
+                    />
 
-                <Sort
-                    title="Time"
-                    options={['< 15', '< 30', '< 60']}
-                    onItemSelected={handleTimeSortChange}
-                />
+                    <Sort
+                        title="Review"
+                        options={['Highest', 'Lowest']}
+                        onItemSelected={handleReviewSortChange}
+                    />
 
+                    <Sort
+                        title="Time"
+                        options={['< 15', '< 30', '< 60']}
+                        onItemSelected={handleTimeSortChange}
+                    />
+
+                </div>
             </Fade>
 
             {/*<DebounceInput*/}
