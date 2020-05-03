@@ -63,7 +63,8 @@ export function Search() {
 
     const [rating, setRating] = useState(null);
 
-    function doSearch(searchQuery) {
+    function doSearch() {
+        let searchQuery = searchInput;
         if (!searchQuery){
             console.log(`Not doing search because there is no text query.`)
             return;
@@ -102,28 +103,27 @@ export function Search() {
         });
     }
 
-    doSearch = debounce(doSearch, 200)
+    useEffect(() => {
+        // Do search
+        doSearch()
+    }, [searchInput, minTime, maxTime, review, rating])
+
+    const debouncedSetSearchInput = debounce(value => setSearchInput(value), 200)
 
     // functions to handle sorts
     function handleRatingSortChange(value) {
         console.log(`Rating sort changed to ${value}`)
         setRating(RATING_SORT_OPTION_TO_RES_ARGS[value]);
-        doSearch(searchInput);
     }
     function handleReviewSortChange(value) {
         console.log(`Review sort changed to ${value}`)
         setReview(REVIEW_SORT_OPTION_TO_RES_ARGS[value]);
-
-        doSearch(searchInput);
-
     }
     function handleTimeSortChange(value) {
         console.log(`Cooking time sort changed to ${value}`);
         const minMaxTimes = TIME_SORT_OPTION_TO_REST_ARGS[value];
         setMinTime(minMaxTimes[0]);
         setMaxTime(minMaxTimes[1]);
-
-        doSearch(searchInput);
     }
     // var a = 5;
     // var b = handleRatingSortChange;
@@ -150,7 +150,7 @@ export function Search() {
                       outline icon color="black"
                       outline icon="search"
                       outline size="lg"
-                          onChange={e => doSearch(e.target.value)}
+                          onChange={e => debouncedSetSearchInput(e.target.value)}
                 />
                 <Sort
                     title="Rating"
