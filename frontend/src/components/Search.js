@@ -10,6 +10,7 @@ import Input from "@material-ui/core/Input";
 import styled, {css} from "styled-components";
 import {Title} from "./Contact";
 import Fade from "react-reveal/Fade";
+import {Sort} from "./Sort";
 
 const SearchTitle = styled(Title)`
   background-color: lightgray;
@@ -32,6 +33,21 @@ function debounce(fn, wait) {
     }
 }
 
+const TIME_SORT_OPTION_TO_REST_ARGS = {
+    '< 15': [0, 15],
+    '< 30': [0, 30],
+    '< 60': [0, 60]
+}
+
+const RATING_SORT_OPTION_TO_RES_ARGS = {
+    'Highest': 'DESC',
+    'Lowest': 'ASC'
+}
+
+const REVIEW_SORT_OPTION_TO_RES_ARGS = {
+    'Highest': 'DESC',
+    'Lowest': 'ASC'
+}
 export function Search() {
     // State and setter search input
     const [searchInput, setSearchInput] = useState(false);
@@ -40,14 +56,44 @@ export function Search() {
     // State and setter for search status (loading request)
     const [isSearching, setIsSearching] = useState(false);
 
+    const [minTime, setMinTime] = useState(null);
+    const [maxTime, setMaxTime] = useState(null);
 
-    function onInputEntered(input) {
-        console.log(input);
-        setIsSearching(input);
-        setSearchInput(input);
+    const [review, setReview] = useState(null);
 
-        input = input.split(" ").join(",");
-        restRequest(`search?q=${input}`).then(response => {
+    const [rating, setRating] = useState(null);
+
+    function doSearch(searchQuery) {
+        if (!searchQuery){
+            console.log(`Not doing search because there is no text query.`)
+            return;
+        }
+        console.log(searchQuery);
+        setIsSearching(searchQuery);
+        setSearchInput(searchQuery);
+
+        searchQuery = searchQuery.split(" ").join(",");
+
+        // construct the url with sort options
+        var url = `search?q=${searchQuery}`
+
+        if (minTime !== null)  {
+            url += `&minTime=${minTime}`;
+        }
+        if (maxTime !== null) {
+            url += `&maxTime=${maxTime}`;
+        }
+
+        if (review !== null) {
+            url += `&review=${review}`;
+        }
+
+        if (rating !== null) {
+            url += `&rating=${rating}`;
+        }
+
+
+        restRequest(url).then(response => {
             // This is executed when request returns data
             setIsSearching(false);
             if (response) {
@@ -56,12 +102,34 @@ export function Search() {
         });
     }
 
-    onInputEntered = debounce(onInputEntered, 200)
+    doSearch = debounce(doSearch, 200)
 
-    function adaptResultToProps(result) {
-        result.rating = result.rating / 20.0;
-        return result;
+    // functions to handle sorts
+    function handleRatingSortChange(value) {
+        console.log(`Rating sort changed to ${value}`)
+        setRating(RATING_SORT_OPTION_TO_RES_ARGS[value]);
+        doSearch(searchInput);
     }
+    function handleReviewSortChange(value) {
+        console.log(`Review sort changed to ${value}`)
+        setReview(REVIEW_SORT_OPTION_TO_RES_ARGS[value]);
+
+        doSearch(searchInput);
+
+    }
+    function handleTimeSortChange(value) {
+        console.log(`Cooking time sort changed to ${value}`);
+        const minMaxTimes = TIME_SORT_OPTION_TO_REST_ARGS[value];
+        setMinTime(minMaxTimes[0]);
+        setMaxTime(minMaxTimes[1]);
+
+        doSearch(searchInput);
+    }
+    // var a = 5;
+    // var b = handleRatingSortChange;
+    // b('hello');
+    // handleRatingSortChange('hello');
+
 
     return (
         <div id="Search" style={{padding:"30px 90px 90px 100px"}}>
@@ -70,7 +138,6 @@ export function Search() {
                     style={{
                         width: "50%",
                         marginLeft: "25%"
-
                     }}>
                     <SearchTitle>Recipes</SearchTitle>
                     <hr
@@ -83,7 +150,24 @@ export function Search() {
                       outline icon color="black"
                       outline icon="search"
                       outline size="lg"
-                          onChange={e => onInputEntered(e.target.value)}
+                          onChange={e => doSearch(e.target.value)}
+                />
+                <Sort
+                    title="Rating"
+                    options={['Highest', 'Lowest']}
+                    onItemSelected={handleRatingSortChange}
+                />
+
+                <Sort
+                    title="Review"
+                    options={['Highest', 'Lowest']}
+                    onItemSelected={handleReviewSortChange}
+                />
+
+                <Sort
+                    title="Time"
+                    options={['< 15', '< 30', '< 60']}
+                    onItemSelected={handleTimeSortChange}
                 />
 
             </Fade>

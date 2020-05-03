@@ -3,24 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.12",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.51",
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
+    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
+    "clsx": "^1.1.0",
     "mdbreact": "^4.26.0",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-transition-group": "^15.6.2",
     "react-animate-on-scroll": "^2.1.5",
-    "react-bootstrap": "^1.0.0-beta.16",
+    "react-bootstrap": "^1.0.1",
     "react-debounce-input": "^3.2.2",
-    "react-dom": "^16.12.0",
+    "react-dom": "^16.13.1",
     "react-fade-in": "^0.1.8",
+    "react-reveal": "^1.2.2",
     "react-scripts": "3.3.1",
+    "react-scroll": "^1.7.16",
     "react-star-ratings": "^2.3.0",
     "react-transition-group": "^4.3.0",
-    "styled-components": "^5.0.1",
+    "styled-components": "^5.1.0",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -44,11 +50,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@material-ui/core": "^4.9.2",
-    "@material-ui/icons": "^4.9.1",
-    "clsx": "^1.1.0",
-    "react-reveal": "^1.2.2",
-    "react-scroll": "^1.7.16"
-  }
+  "devDependencies": {}
 }

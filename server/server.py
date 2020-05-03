@@ -58,9 +58,9 @@ def search():
     minTime = request.args.get('minTime', default=None, type=int)
     maxTime = request.args.get('maxTime', default=None, type=int)
 
-    rating = request.args.get('rating', default=None, type=int)
+    rating = request.args.get('rating', default=None, type=str)
 
-    review_count = request.args.get('review_count', default=None, type=int)
+    review_count = request.args.get('review', default=None, type=str)
 
     recipes = search_by_ingredients(connection, q.split(","),
                                     ingredient_index=INGREDIENT_INDEX)
@@ -71,20 +71,17 @@ def search():
 
     if review_count is not None:
         print(f"Sorting by {review_count}")
-        recipes = sorted(recipes, key=lambda recipe: recipe['review_count'], reverse=review_count == 1)
+        recipes = sorted(recipes, key=lambda recipe: recipe['review_count'], reverse=review_count == 'DESC')
 
     if rating is not None:
         print(f"Sorting by {rating}")
-        recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=rating == 1)
+        recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=rating == 'DESC')
 
-    return jsonify({'total': len(recipes), 'data': recipes[0:25]})
+    return jsonify({'total': len(recipes), 'data': recipes[0:50]})
 
 
 if __name__ == "__main__":
     with open('ingredient_index.pickle', 'rb') as index_file:
         INGREDIENT_INDEX = pickle.load(index_file)
-
-    # import logging
-    # logging.basicConfig(filename='access.log', level=logging.DEBUG)
 
     app.run(host='0.0.0.0', port=5000, threaded=True)
