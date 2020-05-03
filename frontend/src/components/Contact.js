@@ -45,17 +45,17 @@ const SubmitButton = styled(SearchButton)`
 `;
 
 const CenterButtons = styled.div`
-    position: relative;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    //marginTop: 100px;
-    width: 100px;
-    height: 100px;
-    margin-top: 30%;
-    //margin-bottom: 5%;
-    margin-left: -50%;
+    //position: relative;
+    //top: 50%;
+    //left: 50%;
+    //-webkit-transform: translate(-50%, -50%);
+    //transform: translate(-50%, -50%);
+    ////marginTop: 100px;
+    //width: 100px;
+    //height: 100px;
+    //margin-top: 30%;
+    ////margin-bottom: 5%;
+    ////margin-left: -75%;
  
 `;
 
@@ -98,27 +98,28 @@ export function Contact() {
                             width: "150px",
                             border: "1px solid #828282"
                         }}/>
-                    <CenterButtons>
-                        <Button variant="primary"
-                                type="submit">
-                        <span>
-                            <SubmitButton onClick={sendEmail}>
-                                <MailOutlineIcon></MailOutlineIcon>
-                            </SubmitButton>
-                        </span>
+                        <div className="row">
+                            <CenterButtons>
+                                <Button variant="primary"
+                                        type="submit">
                             <span>
-                            <SubmitButton onClick={linkGitHub}>
-                                <GitHubIcon></GitHubIcon>
-                            </SubmitButton>
-                        </span>
+                                <SubmitButton onClick={sendEmail}>
+                                    <MailOutlineIcon></MailOutlineIcon>
+                                </SubmitButton>
+                            </span>
                             <span>
-                            <SubmitButton onClick={linkLinkedIn}
-                            ><LinkedInIcon></LinkedInIcon>
-                            </SubmitButton>
-                        </span>
-
-                        </Button>
-                    </CenterButtons>
+                                <SubmitButton onClick={linkGitHub}>
+                                    <GitHubIcon></GitHubIcon>
+                                </SubmitButton>
+                            </span>
+                            <span>
+                                <SubmitButton onClick={linkLinkedIn}>
+                                    <LinkedInIcon></LinkedInIcon>
+                                </SubmitButton>
+                            </span>
+                                </Button>
+                            </CenterButtons>
+                        </div>
                 </div>
             </Fade>
         </div>
