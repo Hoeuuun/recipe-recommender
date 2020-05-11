@@ -1,20 +1,11 @@
 import json
-
-'''
-Part 1: Converting from JSON to Python
-'''
+from typing import List, Dict
 
 
-def get_data(json_file):
+def get_data(json_file: str) -> List[Dict]:
     """
-    Opens and reads JSON data file, adding each line (recipe) to list
-    of recipes
-
-    parameters:
-        - json_file (string): the path/location of the input data file
-
-    return value:
-        - recipes (list): a list of recipes; each recipe is a dictionary
+    Opens and reads JSON data file,
+    adding each line (recipe object) to list of recipes
     """
     recipes = []
 
@@ -26,21 +17,8 @@ def get_data(json_file):
     return recipes
 
 
-'''
-Part 2: Cleaning the Data
-'''
-
-
-def remove_duplicates(recipe_list):
-    """
-    Removes duplicates (i.e., recipes with the same title)
-
-    parameters:
-        - recipe_list (list): the original recipe list
-
-    return value:
-        - new_recipe_list (list): a new recipe list with duplicates removed
-    """
+def remove_duplicates(recipe_list: List[Dict]) -> List:
+    """ Removes recipes with duplicate titles """
     new_recipe_list = []
     seen = set()
 
@@ -51,16 +29,3 @@ def remove_duplicates(recipe_list):
 
     return new_recipe_list
 
-
-def display_recipes(recipe_list):
-    """
-    Displays the recipes
-
-    parameters:
-        - recipeList (list): a list containing all the recipes by recipe's title
-
-    return value:
-        - none
-    """
-    for recipe in recipe_list:
-        print(recipe['title'])
