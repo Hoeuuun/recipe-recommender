@@ -9,6 +9,7 @@ db = SQLAlchemy(app)
 
 class Recipe(db.Model):
     __tablename__ = 'Recipe'
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     rating = db.Column(db.Integer)
@@ -20,10 +21,12 @@ class Recipe(db.Model):
 
     steps = db.relationship('RecipeStep', back_populates='recipe')
 
+
 class Ingredient(db.Model):
     __tablename__ = 'Ingredient'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+
 
 class RecipeIngredient(db.Model):
     __tablename__ = 'RecipeIngredient'
@@ -35,6 +38,7 @@ class RecipeIngredient(db.Model):
     entity = db.Column(db.String)
     quant_mL = db.Column(db.Float)
 
+
 class RecipeStep(db.Model):
     __tablename__ = 'RecipeStep'
     recipe_id = db.Column(db.Integer, db.ForeignKey('Recipe.id'), primary_key=True)
@@ -42,6 +46,3 @@ class RecipeStep(db.Model):
     instruction = db.Column(db.String, nullable=False)
 
     recipe = db.relationship('Recipe', back_populates='steps')
-
-
-# db.create_all()
