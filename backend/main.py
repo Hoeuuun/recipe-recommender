@@ -1,5 +1,5 @@
 from flask_sqlalchemy import Model
-from backend.model import Recipe, db, RecipeStep
+from backend.model import Recipe, db, RecipeStep, Ingredient
 from typing import List
 
 
@@ -18,6 +18,7 @@ def delete_recipe(recipe_id: int) -> None:
     Recipe.query.filter(Recipe.id == recipe_id).delete()
     db.session.commit()
 
+
 def find_recipe(recipe_id: int) -> Recipe:
     """ Finds a recipe by its id """
     recipe = Recipe.query.filter(Recipe.id == recipe_id).one()
@@ -26,10 +27,28 @@ def find_recipe(recipe_id: int) -> Recipe:
     return recipe
 
 
+def create_ingredient(name) -> Ingredient:
+    """ Creates an ingredient"""
+    ing = Ingredient(name=name)
+    db.session.add(ing)
+
+    return ing
+
+
 def main():
+    db.drop_all()
+    db.create_all()
     insert_recipe('Tasty Pancakes', 4, 100, 15, 'These pancakes are yummy')
-    delete_recipe(1)
-    find_recipe(2)
+    insert_recipe('Fruit Salad', 3, 300, 5, 'Perfecto!')
+    # delete_recipe(1)
+    recipe = find_recipe(1)
+    ing = create_ingredient('Bananas')
+    recipe.ingredients = [ing]
+    ing = create_ingredient('Grapes')
+    recipe.ingredients.append(ing)
+
+    db.session.commit()
+
     print('all goood')
 
 

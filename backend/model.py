@@ -8,7 +8,7 @@ db = SQLAlchemy(app)
 
 
 class Recipe(db.Model):
-    __tablename__ = 'Recipe'
+    __tablename__ = 'recipes'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
@@ -20,18 +20,20 @@ class Recipe(db.Model):
     description = db.Column(db.String)
 
     steps = db.relationship('RecipeStep', back_populates='recipe')
+    ingredients = db.relationship('Ingredient',
+                                  secondary='recipe_ingredients')
 
 
 class Ingredient(db.Model):
-    __tablename__ = 'Ingredient'
+    __tablename__ = 'ingredients'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
 
 class RecipeIngredient(db.Model):
-    __tablename__ = 'RecipeIngredient'
-    recipe_id = db.Column(db.Integer, db.ForeignKey('Recipe.id'), primary_key=True)
-    ingredient_id = db.Column(db.Integer, db.ForeignKey('Ingredient.id'), primary_key=True)
+    __tablename__ = 'recipe_ingredients'
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'), primary_key=True)
+    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredients.id'), primary_key=True)
     quantity = db.Column(db.String)
     value = db.Column(db.Float)
     unit = db.Column(db.String)
@@ -40,8 +42,8 @@ class RecipeIngredient(db.Model):
 
 
 class RecipeStep(db.Model):
-    __tablename__ = 'RecipeStep'
-    recipe_id = db.Column(db.Integer, db.ForeignKey('Recipe.id'), primary_key=True)
+    __tablename__ = 'recipe_steps'
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipes.id'), primary_key=True)
     step_num = db.Column(db.Integer, primary_key=True)
     instruction = db.Column(db.String, nullable=False)
 
