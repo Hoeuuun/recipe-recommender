@@ -7,14 +7,12 @@ from sqlite_helper import search_by_ingredients
 import os, sqlite3
 import pickle
 
+from backend.app import app
+
 _logger = logging.getLogger(__name__)
 
 INGREDIENT_INDEX = None
 
-# Create an instance of Flask class and call it app
-this_folder = os.path.dirname(os.path.realpath(__file__))
-app = Flask(__name__, static_url_path=os.path.abspath(os.path.join(this_folder, '../data/allrecipes')))
-CORS(app)
 
 
 # The default page
