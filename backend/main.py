@@ -48,6 +48,16 @@ def get_recipe_steps(recipe_id: int) -> List[tuple]:
     return steps
 
 
+def get_recipe_ingredients(recipe_id: int) -> List[tuple]:
+    """ Returns a list of recipe ingredients, (recipe_id, ingredient_id) for a given recipe_id"""
+    ingredients = []
+    for i in RecipeIngredient.query.filter(RecipeIngredient.recipe_id == recipe_id):
+        ingredients.append((i.recipe_id, i.ingredient_id))
+
+    print(ingredients)
+    return ingredients
+
+
 def search_title(search_key: str) -> List[Recipe]:
     """ Returns a list of Recipes containing the search key in title/name """
     recipes = Recipe.query.filter(Recipe.title.like(f'%{search_key}%')).all()
@@ -73,6 +83,10 @@ def main():
 
     get_recipe_steps(1)
     search_title('fruit')
+
+    ingredients = get_recipe_ingredients(1)
+    for i in ingredients:
+        print('Recipe 1 - ingredients:', i)
 
     db.session.commit()
 
