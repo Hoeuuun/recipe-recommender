@@ -158,6 +158,7 @@ export function SearchResultCard(props) {
 
     return (
         <Card className={classes.root}>
+
             <SearchResultBrief {...props}
                               onClick={openModal}
                               classes={useCardStyle()}/>

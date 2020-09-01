@@ -23,6 +23,17 @@ class Recipe(db.Model):
     ingredients = db.relationship('Ingredient',
                                   secondary='recipe_ingredients')
 
+    def __init__(self, title, rating, review, time, image, url, description, steps, ingredients):
+        self.title = title
+        self.rating = rating
+        self.review = review
+        self.time = time
+        self.image = image
+        self.url = url
+        self.description = description
+        self.steps = steps
+        self.ingredients = ingredients
+
 
 class Ingredient(db.Model):
     __tablename__ = 'ingredients'

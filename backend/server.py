@@ -1,18 +1,16 @@
 import logging
-
-from flask import Flask, send_from_directory, request, jsonify, abort
-from flask_cors import CORS
-
-from sqlite_helper import search_by_ingredients
-import os, sqlite3
+import os
 import pickle
+import sqlite3
+
+from flask import send_from_directory, request, jsonify, abort
+from backend.sqlite_helper import search_by_ingredients
 
 from backend.app import app
 
 _logger = logging.getLogger(__name__)
 
 INGREDIENT_INDEX = None
-
 
 
 # The default page
@@ -49,7 +47,7 @@ def search():
     q = request.args.get('q', default=None, type=str)
 
     if not q:
-        abort(422, "Missing query")     # 422 unprocessable entity
+        abort(422, "Missing query")  # 422 unprocessable entity
 
     q = q.lower()
 

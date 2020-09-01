@@ -17,6 +17,7 @@ const HeroImage = styled.div`
 
 /* Hero text */
 const MainHeader = styled.div`
+ 
   font-size: 3em;
   letter-spacing: 9px;
   font-style: normal;
@@ -30,11 +31,10 @@ const MainHeader = styled.div`
 //  z-index: 1;
   border-radius: 1.5px;
 
-  
- 
 `;
 
 export const SubHeader= styled.div`
+align-items: center;
   background: #ffffff;
   letter-spacing: 3px;
   color: #202020;
@@ -73,21 +73,22 @@ export const SearchButton = styled.button`
         background-color: white;
         outline: none;
     }
-     
+    
 `;
 
 export function Header() {
     return (
-        <HeroImage>
-        <div id="Header" class="col-12 col-md-8 text-center justify-content-md-center offset-2">
-            <MainHeader>RECIPE RECOMMENDER</MainHeader>
+        <div>
+            <HeroImage>
+                <div id="Header" class="row vertical-middle text-center">
+                    <MainHeader>RECIPE RECOMMENDER</MainHeader>
+                    <SubHeader>Search 87k+ Recipes</SubHeader>
+                    <Link to="Search" smooth={true}>
+                        <SearchButton>Find a Recipe</SearchButton>
+                    </Link>
+                </div>
+            </HeroImage>
         </div>
-        <div class="col-6 col-md-4 text-center offset-4">
-            <SubHeader>Search 87k+ Recipes</SubHeader>
-            <Link to="Search" smooth={true}>
-            <SearchButton>Find a Recipe</SearchButton>
-            </Link>
-        </div>
-        </HeroImage>
+
     );
 }
