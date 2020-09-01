@@ -6,6 +6,7 @@ def get_data(json_file: str) -> List[Dict]:
     """
     Opens and reads JSON data file,
     adding each line (recipe object) to list of recipes
+    :return: a list of recipe dictionaries
     """
     recipes = []
 
@@ -17,15 +18,18 @@ def get_data(json_file: str) -> List[Dict]:
     return recipes
 
 
-def remove_duplicates(recipe_list: List[Dict]) -> List:
-    """ Removes recipes with duplicate titles """
-    new_recipe_list = []
+def remove_duplicates(recipe_list: List[Dict]) -> List[Dict]:
+    """
+    Removes recipes with duplicate titles
+    :return: a new list, containing only unique recipes
+    """
+    unique_recipe_list = []
     seen = set()
 
     for recipe in recipe_list:
         if recipe['title'] not in seen:
             seen.add(recipe['title'])
-            new_recipe_list.append(recipe)
+            unique_recipe_list.append(recipe)
 
-    return new_recipe_list
+    return unique_recipe_list
 

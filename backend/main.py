@@ -1,6 +1,8 @@
 from flask_sqlalchemy import Model
 from backend.model import Recipe, db, RecipeStep, Ingredient, RecipeIngredient
-from typing import List
+from typing import List, Tuple
+
+from sqlalchemy import join
 
 
 def insert_recipe(title, rating, review, time, description) -> None:
@@ -36,7 +38,7 @@ def create_ingredient(name) -> Ingredient:
     return ing
 
 
-def get_recipe_steps(recipe_id: int) -> List[tuple]:
+def get_recipe_steps(recipe_id: int) -> List[Tuple[int, str]]:
     """ Returns a list of recipe steps (number and methods/directions) by id"""
     steps = []
 
@@ -48,7 +50,7 @@ def get_recipe_steps(recipe_id: int) -> List[tuple]:
     return steps
 
 
-def get_recipe_ingredients(recipe_id: int) -> List[tuple]:
+def get_recipe_ingredients(recipe_id: int) -> List[Tuple[int, int]]:
     """ Returns a list of recipe ingredients, (recipe_id, ingredient_id) for a given recipe_id"""
     ingredients = []
     for i in RecipeIngredient.query.filter(RecipeIngredient.recipe_id == recipe_id):
@@ -67,6 +69,16 @@ def search_title(search_key: str) -> List[Recipe]:
         print('id:', r.id, 'title:', r.title, 'Ingredients:', r.ingredients)
 
     return recipes
+
+
+def join_recipes_with_ingredients_table():
+    # result = db.session.query(Recipe).join(Ingredient).all()
+    # for row in result:
+    #     for ing in row.ings:
+    #         print(row.id, row.title, ing.id, ing.name)
+    result = db.session.execute("select * from recipes inner join ingredients on recipes.id = ingredients.id")
+    for row in result:
+        print(row)
 
 
 def main():
@@ -88,10 +100,13 @@ def main():
     for i in ingredients:
         print('Recipe 1 - ingredients:', i)
 
+    print('joinng recipes and ingredients tables...')
+    join_recipes_with_ingredients_table()
+
     db.session.commit()
 
     print('all goood')
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
