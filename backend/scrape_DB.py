@@ -1,10 +1,11 @@
 import pickle
 import sqlite3
 from sqlite3 import OperationalError
-from parse_json import get_data, remove_duplicates
-from ingredients_index import update_index
 from quantulum3 import parser
-from quantities import convert_to_mL
+
+from backend.parse_json import get_data, remove_duplicates
+from backend.ingredients_index import update_index
+from backend.quantities import convert_to_mL
 
 
 def insert_new_recipe(connection, data, ingredients_index=None):
