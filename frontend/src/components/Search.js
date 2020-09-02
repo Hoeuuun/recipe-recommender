@@ -176,14 +176,6 @@ export function Search() {
                 </div>
             </Fade>
 
-            {/*<DebounceInput*/}
-            {/*    placeholder="Enter ingredients"*/}
-            {/*    minLength={3}*/}
-            {/*    debounceTimeout={200}*/}
-            {/*    onChange={e => onInputEntered(e.target.value)}*/}
-
-            {/*/>*/}
-
             {isSearching && searchInput && <h1 align="center">Searching for: {searchInput}...</h1>}
 
             {!isSearching && searchInput && <h1 align="center">Results for: {searchInput}</h1>}
