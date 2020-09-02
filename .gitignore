@@ -1,5 +1,6 @@
 data.db
 recipes.json
+images
 parseJSON.pyc
 __pycache__
 .idea

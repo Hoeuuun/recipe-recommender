@@ -88,6 +88,10 @@ function convertMinsToHrs(mins) {
     h = h < 1 ? '' : h + ' hr ';
     m = m < 1 ? '' : m + ' min';
 
+    if (h === '' && m === '') {
+        return `${0}`;
+    }
+
     return `${h} ${m}`;
 }
 
