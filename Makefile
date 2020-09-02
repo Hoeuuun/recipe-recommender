@@ -12,3 +12,6 @@ frontend_up:
 
 backend_up:
 	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python server.py
+
+populate_db:
+	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python scrape_DB.py
