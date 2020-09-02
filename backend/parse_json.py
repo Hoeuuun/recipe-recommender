@@ -20,15 +20,16 @@ def get_data(json_file: str) -> List[Dict]:
 
 def remove_duplicates(recipe_list: List[Dict]) -> List[Dict]:
     """
-    Removes recipes with duplicate titles
+    Removes recipes with duplicate titles and descriptions
     :return: a new list, containing only unique recipes
     """
     unique_recipe_list = []
-    seen = set()
+    seen = set()    # set of tuples, set{(recipe_title, recipe_description), ...}
 
     for recipe in recipe_list:
-        if recipe['title'] not in seen:
-            seen.add(recipe['title'])
+        title_description = (recipe['title'], recipe['description'])
+        if title_description not in seen:
+            seen.add(title_description)
             unique_recipe_list.append(recipe)
 
     return unique_recipe_list

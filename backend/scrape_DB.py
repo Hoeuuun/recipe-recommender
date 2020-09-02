@@ -1,14 +1,12 @@
-import pickle
 import sqlite3
 from sqlite3 import OperationalError
 from quantulum3 import parser
 
 from backend.parse_json import get_data, remove_duplicates
-from backend.ingredients_index import update_index
 from backend.quantities import convert_to_mL
 
 
-def insert_new_recipe(connection, data, ingredients_index=None):
+def insert_new_recipe(connection, data):
     # Create a cursor object
     cursor = connection.cursor()
 
@@ -39,10 +37,6 @@ def insert_new_recipe(connection, data, ingredients_index=None):
 
     # Create a set to ensure we add only unique ingredients
     seen_ingredients = set()
-
-    # If the ingredient's index is already in the dictionary, then update it with the new recipe
-    if ingredients_index is not None:
-        update_index(ingredients_index, data)
 
     # Parse ingredients' quantity
     ingredient_quantity = 'NA'
@@ -126,11 +120,10 @@ recipes_original = get_data('../data/allrecipes/data/recipes.json')
 recipes = remove_duplicates(recipes_original)
 
 # Populate the database with data from JSON file
-ingredient_word_index = {}  # a dictionary for each ingredient
 
 # Iterate through all the recipes and insert them into the database
 for i, recipe in enumerate(recipes):
-    insert_new_recipe(conn, recipe, ingredients_index=ingredient_word_index)
+    insert_new_recipe(conn, recipe)
 
 # Save the changes
 conn.commit()
@@ -141,6 +134,4 @@ conn.close()
 # By now, if no errors, success
 print('all good')
 
-# Finally, if success, write a pickled rep of the ingredients dictionary to file
-print('dumping index to ingredient_index.pickle')
-pickle.dump(ingredient_word_index, open('ingredient_index.pickle', 'wb'))
+

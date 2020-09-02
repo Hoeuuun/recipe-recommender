@@ -126,11 +126,6 @@ export function Search() {
         setMinTime(minMaxTimes[0]);
         setMaxTime(minMaxTimes[1]);
     }
-    // var a = 5;
-    // var b = handleRatingSortChange;
-    // b('hello');
-    // handleRatingSortChange('hello');
-
 
     return (
         <div id="Search" style={{padding:"30px 90px 90px 100px"}}>

@@ -1,4 +1,3 @@
-# Create an instance of Flask class and call it app
 import os
 
 from flask import Flask
