@@ -1,15 +1,10 @@
 import logging
 import os
-import pickle
 import sqlite3
 
 from flask import send_from_directory, request, jsonify, abort
-
 from sqlalchemy import and_, desc, asc, or_
-
 from backend.model import db, Recipe, RecipeIngredient, Ingredient, RecipeStep
-from backend.sqlite_helper import search_by_ingredients
-
 from backend.app import app
 
 _logger = logging.getLogger(__name__)
@@ -62,8 +57,10 @@ def search():
 
     review_count = request.args.get('review', default=None, type=str)
 
+    # text search, splits each word separated by ',' uses as wildcard for query
     ilike_query = '%'.join(q.split(','))
     ilike_query = f'%{ilike_query}%'
+    # searches in title, description, and ingredients
     recipes_query = db.session.query(Recipe).filter(
         or_(
             Recipe.description.ilike(ilike_query),
@@ -77,41 +74,21 @@ def search():
             Recipe.time >= minTime,
             Recipe.time <= maxTime
         ))
+
     if review_count is not None:
         fn = desc if review_count == 'DESC' else asc
         recipes_query = recipes_query.order_by(fn(Recipe.review_count))
+
     if rating is not None:
         fn = desc if rating == 'DESC' else asc
         recipes_query = recipes_query.order_by(fn(Recipe.rating))
 
-    recipes_query = recipes_query.limit(50)
+    recipes_query = recipes_query.limit(50)  # TODO: implement pagination with scrolling, instead of using limit
 
     recipes = recipes_query.all()
-
-
-
-    """
-    recipes = search_by_ingredients(connection, q.split(","),
-                                    ingredient_index=INGREDIENT_INDEX)
-
-    if minTime is not None and maxTime is not None:
-        print(f"Using {minTime} - {maxTime} minute range.")
-        recipes = list(filter(lambda recipe: recipe['time'] >= minTime and recipe['time'] <= maxTime, recipes))
-
-    if review_count is not None:
-        print(f"Sorting by {review_count}")
-        recipes = sorted(recipes, key=lambda recipe: recipe['review_count'], reverse=review_count == 'DESC')
-
-    if rating is not None:
-        print(f"Sorting by {rating}")
-        recipes = sorted(recipes, key=lambda recipe: recipe['rating'], reverse=rating == 'DESC')
-    """
 
     return jsonify({'total': len(recipes), 'data': [recipe.to_dict() for recipe in recipes]})
 
 
 if __name__ == "__main__":
-    with open('ingredient_index.pickle', 'rb') as index_file:
-        INGREDIENT_INDEX = pickle.load(index_file)
-
     app.run(host='0.0.0.0', port=5000, threaded=True)

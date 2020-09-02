@@ -1,6 +1,5 @@
 from typing import Dict
 
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from backend.app import app
@@ -36,7 +35,6 @@ class Recipe(db.Model):
         self.steps = steps
         self.ingredients = ingredients
 
-
     def to_dict(self) -> Dict:
         return {
             'id': self.id,
@@ -50,8 +48,10 @@ class Recipe(db.Model):
             'directions': [step.instruction for step in self.steps],
         }
 
+
 class Ingredient(db.Model):
     __tablename__ = 'Ingredient'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
@@ -64,6 +64,7 @@ class Ingredient(db.Model):
 
 class RecipeIngredient(db.Model):
     __tablename__ = 'RecipeIngredients'
+
     recipeId = db.Column(db.Integer, db.ForeignKey('Recipe.id'), primary_key=True)
     ingredientId = db.Column(db.Integer, db.ForeignKey('Ingredient.id'), primary_key=True)
     quantity = db.Column(db.String)
@@ -75,6 +76,7 @@ class RecipeIngredient(db.Model):
 
 class RecipeStep(db.Model):
     __tablename__ = 'RecipeSteps'
+
     recipeId = db.Column(db.Integer, db.ForeignKey('Recipe.id'), primary_key=True)
     stepNumber = db.Column(db.Integer, primary_key=True)
     instruction = db.Column(db.String, nullable=False)
