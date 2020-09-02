@@ -36,6 +36,7 @@ class Recipe(db.Model):
         self.steps = steps
         self.ingredients = ingredients
 
+
     def to_dict(self) -> Dict:
         return {
             'id': self.id,
