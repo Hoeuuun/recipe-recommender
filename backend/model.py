@@ -1,13 +1,6 @@
 from typing import Dict
 
-from flask_sqlalchemy import SQLAlchemy
-
 from backend.extensions import db
-
-
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-# db = SQLAlchemy(app)
 
 
 class Recipe(db.Model):
