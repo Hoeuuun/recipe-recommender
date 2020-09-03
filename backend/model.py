@@ -2,10 +2,12 @@ from typing import Dict
 
 from flask_sqlalchemy import SQLAlchemy
 
-from backend.app import app
+from backend.extensions import db
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
-db = SQLAlchemy(app)
+
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+# db = SQLAlchemy(app)
 
 
 class Recipe(db.Model):
@@ -23,17 +25,6 @@ class Recipe(db.Model):
     steps = db.relationship('RecipeStep', back_populates='recipe')
     ingredients = db.relationship('Ingredient',
                                   secondary='RecipeIngredients')
-
-    def __init__(self, title, rating, review, time, image, url, description, steps, ingredients):
-        self.title = title
-        self.rating = rating
-        self.review = review
-        self.time = time
-        self.image = image
-        self.url = url
-        self.description = description
-        self.steps = steps
-        self.ingredients = ingredients
 
     def to_dict(self) -> Dict:
         return {
@@ -53,7 +44,7 @@ class Ingredient(db.Model):
     __tablename__ = 'Ingredient'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False, unique=True)
 
     def to_dict(self) -> Dict:
         return {
