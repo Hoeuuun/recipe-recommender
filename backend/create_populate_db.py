@@ -34,9 +34,6 @@ def write_to_db():
 
             ingredients = set(recipe['ingredients'])
 
-            if len(ingredients) != len(recipe['ingredients']):
-                print(recipe)
-
             instructions = recipe['instructions']
 
             if image:
