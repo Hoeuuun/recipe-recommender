@@ -82,7 +82,7 @@ export function Header() {
             <HeroImage>
                 <div id="Header" class="row vertical-middle text-center">
                     <MainHeader>RECIPE RECOMMENDER</MainHeader>
-                    <SubHeader>Search 87k+ Recipes</SubHeader>
+                    <SubHeader>Search 91k+ Recipes</SubHeader>
                     <Link to="Search" smooth={true}>
                         <SearchButton>Find a Recipe</SearchButton>
                     </Link>
