@@ -15,7 +15,7 @@
     color: black !important;
 }
 
-.md-form input[type='text']:focus:([readonly]) + i {
+.md-form input[type='text']:focus:not([readonly]) + i {
     color: black !important;
 }
 

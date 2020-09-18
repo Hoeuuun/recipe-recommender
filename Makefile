@@ -10,6 +10,10 @@ frontend_install:
 frontend_up:
 	cd frontend && npm start
 
+frontend_build: frontend_install
+	cd frontend && npm run-script build
+	cp -r frontend/build/ static/
+
 backend_up:
 	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python server.py
 
