@@ -11,7 +11,7 @@ frontend_up:
 	cd frontend && npm start
 
 frontend_build: frontend_install
-	cd frontend && npm run-script build
+	cd frontend && PUBLIC_URL='https://hoeunsim.com/rr' npm run-script build
 	cp -r frontend/build/ static/
 
 backend_up:
@@ -22,3 +22,6 @@ backend_up:
 
 create_and_populate_db:
 	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python create_populate_db.py
+
+copy_over_to_digital_ocean:
+	rsync --exclude=venv --exclude=node_modules -rav ../recipe-recommender hoeun@45.55.110.193:~

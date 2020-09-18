@@ -1,4 +1,4 @@
-export const serverAddress = 'http://localhost:5000'
+export const serverAddress = 'https://hoeunsim.com/rr'
 
 export function restRequest(endpoint) {
     const url = `${serverAddress}/${endpoint}`;

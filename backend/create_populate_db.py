@@ -22,7 +22,7 @@ def write_to_db():
     recipes = remove_duplicates(recipes_original)
 
     with db.session.no_autoflush:
-        for recipe in recipes[0:50]:
+        for recipe in recipes:
             # id = recipe['id']
             title = recipe['title']
             rating = int((recipe['rating_stars'] / 5) * 100)
@@ -32,7 +32,11 @@ def write_to_db():
             image = recipe['photo_url']
             description = recipe['description']
 
-            ingredients = recipe['ingredients']
+            ingredients = set(recipe['ingredients'])
+
+            if len(ingredients) != len(recipe['ingredients']):
+                print(recipe)
+
             instructions = recipe['instructions']
 
             if image:
