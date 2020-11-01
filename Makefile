@@ -1,5 +1,6 @@
 MAKEFILE_PATH = $(abspath $(lastword $(MAKEFILE_LIST)))
 ROOT_FOLDER = $(shell dirname $(MAKEFILE_PATH))
+BACKEND_FLAGS = PYTHONPATH=$(ROOT_FOLDER)
 
 frontend_clean:
 	cd frontend && rm -rf node_modules
@@ -15,7 +16,10 @@ frontend_build: frontend_install
 	cp -r frontend/build/ static/
 
 backend_up:
-	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python server.py
+	cd backend && $(BACKEND_FLAGS) python server.py
+
+backend_tests:
+	cd backend/tests && $(BACKEND_FLAGS) pytest
 
 #populate_db:
 #	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python scrape_DB.py
