@@ -127,3 +127,4 @@ def test_search_by_review_count(app, client):
 
     assert_sorted(data['data'], 'review_count', False)
 
+
