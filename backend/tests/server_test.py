@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import List
 
 import pytest
 
@@ -74,5 +75,55 @@ def test_search_no_results(app, client):
     data = response.get_json()
     assert data['total'] == 0
 
+
+def assert_sorted(list_:List, key:str, reverse:bool):
+    sorted_list = sorted(list_, key=lambda x: x[key], reverse=reverse)
+    assert sorted_list == list_
+
+
 # TODO: tests for filters
+def test_search_by_review_count(app, client):
+    # Given: More than one egg recipe with different
+    # review counts
+    with app.app_context():
+        egg_recipe1 = Recipe(
+            title='Egg Salad',
+            description='Eggcellent!',
+            ingredients=[Ingredient(name='1 teaspoon of brown sugar')],
+            review_count=3
+        )
+        egg_recipe2 = Recipe(
+            title='Egg Summer Salad',
+            description='Egg-licious!',
+            ingredients=[Ingredient(name='2 teaspoons of brown sugar')],
+            review_count=100
+        )
+        db.session.add(egg_recipe1)
+        db.session.add(egg_recipe2)
+        db.session.commit()
+
+        recipes = db.session.query(Recipe).all()
+        print(recipes)
+
+    # When: When we filter egg results by "Highest" reviews
+    response = client.get('/search?q=egg&review=DESC')
+    assert response.status_code == HTTPStatus.OK
+
+    # Then: We should get the results in descending order, with
+    # the most reviewed recipe displayed first
+    data = response.get_json()
+    assert data['total'] == 2
+
+    assert_sorted(data['data'], 'review_count', True)
+
+    # When: When we filter egg results by "Lowest" reviews
+    response = client.get('/search?q=egg&review=ASC')
+    assert response.status_code == HTTPStatus.OK
+
+    # Then: We should get the results in ascending order, with
+    # the lowest reviewed recipe displayed first
+    data = response.get_json()
+    assert data['total'] == 2
+
+    assert_sorted(data['data'], 'review_count', False)
 
