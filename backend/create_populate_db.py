@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 from backend.app import create_app
 from backend.extensions import db
 from backend.model import Recipe, RecipeStep, Ingredient
@@ -10,17 +12,21 @@ def main():
     with app.app_context():
         db.create_all()
 
-        write_to_db()
+        read_from_file_and_write_to_db('../data/allrecipes/data/recipes.json')
 
 
-def write_to_db():
+def read_from_file_and_write_to_db(filename):
+    recipes_original = get_data('../data/allrecipes/data/recipes.json')
+    recipes = remove_duplicates(recipes_original)
+
+    return write_to_db(recipes)
+
+
+def write_to_db(recipes: List[Dict]):
     """
     Gets the data, and after cleaning it, populates
     the db with each recipe inserted as a row
     """
-    recipes_original = get_data('../data/allrecipes/data/recipes.json')
-    recipes = remove_duplicates(recipes_original)
-
     with db.session.no_autoflush:
         for recipe in recipes:
             # id = recipe['id']
