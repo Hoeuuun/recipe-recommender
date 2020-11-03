@@ -81,7 +81,6 @@ def test_search_no_results(app, client):
     data = response.get_json()
     assert data['total'] == 0
 
-
 # tests for filters
 def assert_sorted(list_: List, key: str, reverse: bool):
     sorted_list = sorted(list_, key=lambda x: x[key], reverse=reverse)
