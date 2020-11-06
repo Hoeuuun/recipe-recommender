@@ -2,8 +2,8 @@ import json
 
 from backend.create_populate_db import write_to_db
 from backend.extensions import db
-from backend.model import Recipe, Ingredient, RecipeStep
 
+from backend.model import Recipe, Ingredient, RecipeStep
 
 def test_import_json_data_into_db(app):
     # Given: A JSON object
