@@ -10,7 +10,9 @@ from backend.model import Recipe, Ingredient
 def test_search_in_recipe_title(app, client):
     # Given: An egg salad exists in the database with egg in title
     with app.app_context():
-        egg_salad = Recipe(title='Yummy Egg Salad')
+        egg_salad = Recipe(title='Yummy Egg Salad',
+                           ingredients=[Ingredient(name='1 brown egg')])
+
         db.session.add(egg_salad)
         db.session.commit()
 
@@ -21,6 +23,15 @@ def test_search_in_recipe_title(app, client):
     # Then: We should get back 1 result
     data = response.get_json()
     assert data['total'] == 1
+    assert data['data'][0] == {'description': None,
+                               'directions': [],
+                               'id': 1,
+                               'image': None,
+                               'ingredients': ["1 brown egg"],
+                               'rating': None,
+                               'review_count': None,
+                               'time': None,
+                               'title': 'Yummy Egg Salad'}
 
 
 def test_search_in_recipe_description(app, client):

@@ -2,8 +2,8 @@ import json
 
 from backend.create_populate_db import write_to_db
 from backend.extensions import db
-from backend.model import Recipe
 
+from backend.model import Recipe, Ingredient, RecipeStep
 
 def test_import_json_data_into_db(app):
     # Given: A JSON object
@@ -58,3 +58,11 @@ def test_import_json_data_into_db(app):
         # Then: The object will be inserted as a new recipe row
         rows = db.session.query(Recipe).count()
         assert rows == 1
+
+        # Then: The Ingredients table will contain a list of ingredient IDs and names for the recipe
+        ingredient_list = db.session.query(Ingredient).count()
+        assert ingredient_list == 14
+
+        # Then The RecipeStep table will contain a list of steps for the given recipe
+        recipe_steps = db.session.query(RecipeStep).count()
+        assert recipe_steps == 5
