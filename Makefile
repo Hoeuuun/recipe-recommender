@@ -15,11 +15,14 @@ frontend_build: frontend_install
 	cd frontend && PUBLIC_URL='https://hoeunsim.com/rr' npm run-script build
 	cp -r frontend/build/ static/
 
+backend_clean:
+	cd backend && rm test_*.db
+
 backend_up:
 	cd backend && $(BACKEND_FLAGS) python server.py
 
 backend_tests:
-	cd backend/tests && $(BACKEND_FLAGS) pytest
+	cd backend/tests && $(BACKEND_FLAGS) pytest --cov=backend --cov-report html:htmlcov
 
 #populate_db:
 #	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python scrape_DB.py
