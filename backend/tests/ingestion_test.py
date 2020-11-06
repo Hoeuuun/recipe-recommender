@@ -63,7 +63,6 @@ def test_import_json_data_into_db(app):
         ingredient_list = db.session.query(Ingredient).count()
         assert ingredient_list == 14
 
-
         # Then The RecipeStep table will contain a list of steps for the given recipe
         recipe_steps = db.session.query(RecipeStep).count()
         assert recipe_steps == 5
