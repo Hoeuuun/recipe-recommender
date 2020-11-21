@@ -44,7 +44,7 @@ make frontend_up
 
 ### Deploying the app
 ```
-make back
+make backend_up
 make frontend_build
 ```
 
