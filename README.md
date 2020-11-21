@@ -1,4 +1,12 @@
 # recipe-recommender
+* [Recipe-Recommender](https://hoeunsim.com/rr/) is a search engine with 91k+ recipes from [Allrecipes](https://www.allrecipes.com/).
+* It’s a web app for finding recipes and discovering new cuisines, dishes, and drinks!
+* Users may quickly search for recipes by entering into the search box keywords, like recipe names or ingredients or both.
+* Results are displayed as cards in a Pinterest-like grid. 
+* Clicking on a recipe card will launch that recipe’s popup window, that contains more information about the recipe, including a list of required ingredients and cooking instructions.
+* Optionally, users may sort recipe results by rating, time, or reviews.
+* TL;DR: Recipe-Recommender helps you get cooking, bringing out your inner chef!
+
 
 ### Getting started
 You will need to have these programs installed in your environment:
