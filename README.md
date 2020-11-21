@@ -42,5 +42,5 @@ make frontend_build
 
 ### Testing the app
 ```
-backend_tests
+make backend_tests
 ```
