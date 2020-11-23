@@ -3,7 +3,7 @@
 * It’s a web app for finding recipes and discovering new cuisines, dishes, and drinks!
 * Users may quickly search for recipes by entering into the search box keywords, like recipe names or ingredients or both.
 * Results are displayed as cards in a Pinterest-like grid. 
-* Clicking on a recipe card will launch that recipe’s popup window, that contains more information about the recipe, including a list of required ingredients and cooking instructions.
+* Clicking on a recipe card will launch that recipe’s popup window, which contains more information about the recipe, including a list of ingredients and cooking instructions.
 * Optionally, users may sort recipe results by rating, time, or reviews.
 * TL;DR: Recipe-Recommender helps you get cooking, bringing out your inner chef!
 
