@@ -42,13 +42,13 @@ make backend_up
 make frontend_up
 ```
 
+### Testing the app
+```
+make backend_tests
+```
+
 ### Deploying the app
 ```
 make backend_up
 make frontend_build
-```
-
-### Testing the app
-```
-make backend_tests
 ```
