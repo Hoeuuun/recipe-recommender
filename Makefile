@@ -32,3 +32,13 @@ create_and_populate_db:
 
 copy_over_to_digital_ocean:
 	rsync --exclude=venv --exclude=node_modules -rav ../recipe-recommender hoeun@45.55.110.193:~
+
+docker_build: frontend_build
+	docker image build -t rr .
+	docker run -p 5001:5000 rr
+
+docker_stop:
+	docker stop $(docker ps -aq)
+
+docker_remove:
+	docker rm $(docker ps -aq)
