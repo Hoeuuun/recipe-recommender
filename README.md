@@ -52,3 +52,8 @@ make backend_tests
 make backend_up
 make frontend_build
 ```
+
+### Building the Docker image
+```
+make docker_build
+```
