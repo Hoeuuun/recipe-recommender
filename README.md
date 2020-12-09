@@ -5,7 +5,7 @@
 * Results are displayed as cards in a Pinterest-like grid. 
 * Clicking on a recipe card will launch that recipe’s popup window, which contains more information about the recipe, including a list of ingredients and cooking instructions.
 * Optionally, users may sort recipe results by rating, time, or reviews.
-* TL;DR: Recipe-Recommender helps you get cooking, bringing out your inner chef!
+* TL;DR: Recipe-Recommender helps you find recipes and get cookin'!
 
 
 ### Getting started
