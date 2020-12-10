@@ -1,9 +1,11 @@
 import json
 
 from backend.create_populate_db import write_to_db
+from backend.parse_json import remove_duplicates
 from backend.extensions import db
 
 from backend.model import Recipe, Ingredient, RecipeStep
+
 
 def test_import_json_data_into_db(app):
     # Given: A JSON object
@@ -66,3 +68,17 @@ def test_import_json_data_into_db(app):
         # Then The RecipeStep table will contain a list of steps for the given recipe
         recipe_steps = db.session.query(RecipeStep).count()
         assert recipe_steps == 5
+
+
+def test_parse_json(app):
+    # Given: A list with two JSON objects with the same titles and descriptions
+    recipes = [{"title":"Basil, Roasted Peppers and Monterey Jack Cornbread",
+                "description":"I came up with something great!"},
+               {"title":"Basil, Roasted Peppers and Monterey Jack Cornbread",
+                "description":"I came up with something great!"}]
+    # When: We call our remove_duplicates function, passing in this list
+    unique_recipe_list = remove_duplicates(recipes)
+
+    # Then: The list should contain only one JSON object
+    assert len(unique_recipe_list) == 1
+

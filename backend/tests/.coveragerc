@@ -1,0 +1,8 @@
+[run]
+omit =
+    */quantities.py
+    tests/*
+    */main.py
+
+[html]
+directory = coverage_html_report
