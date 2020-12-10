@@ -24,6 +24,9 @@ backend_up:
 backend_tests:
 	cd backend/tests && $(BACKEND_FLAGS) pytest --cov=backend --cov-report html:htmlcov
 
+backend_tests_coverage:
+	open backend/tests/htmlcov/index.html
+
 #populate_db:
 #	cd backend && PYTHONPATH="$(ROOT_FOLDER)" python scrape_DB.py
 
